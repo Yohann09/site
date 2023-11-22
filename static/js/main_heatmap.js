@@ -1,7 +1,7 @@
 // Test du chargement des probas:
 
 // Remplacez le chemin par le chemin absolu vers votre fichier JSON
-const cheminVersJSON = "\C:\\Users\\yohan\\test_upload_site\\site_ldc_draw\\UCL_sans_flask\\static\\isom.json";
+const cheminVersJSON = "static/isom.json";
 
 fetch(cheminVersJSON)
   .then(response => response.json())
