@@ -8,7 +8,10 @@ fetch(cheminVersJSON)
   .then(data => {
     console.log("on a chargé les données");
     resultat=data;
-    let q, perm1, perm2 = G_init.isom()
+    let result = G_init.isom()
+      let q=result[0]
+      let perm1=result[1]
+      let perm2=result[2]
       console.log(q,perm1,perm2)
     let proba = resultat[String(q)][String(G_init.index_eq_runner(G_init.index_name("PSG"), perm2))+", "+G_init.index_eq_winner(G_init.index_name("Bayern"), perm1)]
     console.log(proba)
