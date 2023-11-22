@@ -9,7 +9,7 @@ fetch(cheminVersJSON)
     console.log("on a chargé les données");
     resultat=data;
     let q, perm1, perm2 = G_init.isom()
-    let proba = G_init.mat(resultat)[index_name("Bayern")+1][index_name("PSG")]
+    let proba = G_init.mat(resultat)[G_init.index_name("Bayern")+1][G_init.index_name("PSG")]
     console.log(proba)
   })
   .catch(error => console.error('Erreur de chargement du fichier JSON', error));
