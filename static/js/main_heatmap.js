@@ -2,44 +2,416 @@
 
 // Remplacez le chemin par le chemin absolu vers votre fichier JSON
 const cheminVersJSON = "static/isom.json";
-
+let resultat;
 fetch(cheminVersJSON)
   .then(response => response.json())
   .then(data => {
-    console.log(data);
+    console.log("on a chargé les données");
+    resultat=data
   })
   .catch(error => console.error('Erreur de chargement du fichier JSON', error));
 
-/*
-let xhr = new XMLHttpRequest();
-xhr.overrideMimeType("application/json");
-xhr.open("GET", "\C:\\Users\\yohan\\test_upload_site\\site_ldc_draw\\UCL_sans_flask\\static\\isom.json", false); // Notez-le "false" pour le mode synchrone
-//xhr.open("GET", "https://github.com/Yohann09/site_ldc_draw/blob/main/isom.json", false); // Notez-le "false" pour le mode synchrone
-xhr.send();
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/*      Fonctions pour lire la base de données      */
+class Team {
+    constructor(name, country, group, set) {
+        this._name = name;
+        this._country = country;
+        this._group = group;
+        this._set = set;
+    }
 
-let resultat;
+    name() {
+        return this._name;
+    }
 
-if (xhr.status === 200) {
-  resultat = JSON.parse(xhr.responseText);
-  // Je peux maintenant utiliser myJSONData dans le reste du code
-} else {
-  console.error('Erreur de chargement du fichier JSON resultat');
-}*/
-/*
-let xhr = new XMLHttpRequest();
-xhr.overrideMimeType("application/json");
-xhr.open("GET", "/static/resultat_hoy.json", false); // Notez-le "false" pour le mode synchrone
-xhr.send();
+    country() {
+        return this._country;
+    }
 
-let resultat_hoy;
+    group() {
+        return this._group;
+    }
 
-if (xhr.status === 200) {
-  resultat_hoy = JSON.parse(xhr.responseText);
-  // Je peux maintenant utiliser myJSONData dans le reste du code
-} else {
-  console.error('Erreur de chargement du fichier JSON resultat');
+    set() {
+        return this._set;
+    }
 }
-*/
+
+class GraphBipartite {
+    constructor(features) {
+        if (features.length === 0) {
+            this.matrix = [];
+            this._length = 0;
+            this._teams = [];
+            this.teams_runners_up = [];
+            this.teams_winners = [];
+        } else {
+            this.matrix = features[0];
+            this._length = features[3];
+            this._teams = features[4];
+            this.teams_runners_up = features[1];
+            this.teams_winners = features[2];
+        }
+        this.last_runner_drawn = " ";
+    }
+
+    runners_up() {
+        return this.teams_runners_up;
+    }
+
+    winners() {
+        return this.teams_winners;
+    }
+
+    length() {
+        return this._length;
+    }
+
+    teams() {
+        return this._teams;
+    }
+
+    set_length(num) {
+        this._length = num;
+    }
+
+    copy_graph() {
+        // pour crÃ©er un autre graph avec les mÃªmes composants
+        const matrix2 = this.matrix.map(line => line.slice());
+        const runners_up2 = this.runners_up().slice();
+        const winners2 = this.winners().slice();
+        const length = this.length();
+        const teams2 = this.teams().slice();
+        const new_graph = new GraphBipartite([matrix2, runners_up2, winners2, length, teams2]);
+        return new_graph;
+    }
+
+    add_team(team) {
+        // pour mettre les Ã©quipes au dÃ©but
+        if (team.set() === "runner up") {
+            this.teams_runners_up.push(team.name());
+            for (let i = 0; i < this.winners().length; i++) {
+                const winner = this.winners()[i];
+                if (
+                    this.teams()[this.index_teams(winner)].country() !== team.country() &&
+                    this.teams()[this.index_teams(winner)].group() !== team.group()
+                ) {
+                    this.matrix[i].push(1);
+                } else {
+                    this.matrix[i].push(0);
+                }
+            }
+        } else {
+            this.teams_winners.push(team.name());
+            this.matrix.push([]);
+            for (let i = 0; i < this.runners_up().length; i++) {
+                const runner = this.runners_up()[i];
+                if (
+                    this.teams()[this.index_teams(runner)].country() !== team.country() &&
+                    this.teams()[this.index_teams(runner)].group() !== team.group()
+                ) {
+                    this.matrix[this.matrix.length - 1].push(1);
+                } else {
+                    this.matrix[this.matrix.length - 1].push(0);
+                }
+            }
+        }
+        this.set_length(this.length() + 1);
+        this._teams.push(team);
+    }
+
+    index_teams(name) {
+        for (let i = 0; i < this.teams().length; i++) {
+            if (name === this.teams()[i].name()) {
+                return i;
+            }
+        }
+        console.log("wsh");
+    }
+
+    index_runner(runner) {
+        for (let k = 0; k < this.runners_up().length; k++) {
+            if (this.runners_up()[k] === runner) {
+                return k;
+            }
+        }
+    }
+
+    index_winner(winner) {
+        for (let k = 0; k < this.winners().length; k++) {
+            if (this.winners()[k] === winner) {
+                return k;
+            }
+        }
+    }
+
+    index_name(name) {
+        for (let k = 0; k < this.runners_up().length; k++) {
+            if (this.runners_up()[k] === name) {
+                return k;
+            }
+        }
+        for (let k = 0; k < this.winners().length; k++) {
+            if (this.winners()[k] === name) {
+                return k;
+            }
+        }
+    }
+
+    remove_2t(i_0, j_0) {
+        // enlever 2 club du graph
+        if (j_0 >= this.winners().length) {
+            console.log("chelou");
+        }
+        this.matrix.splice(j_0, 1);
+        for (let k = 0; k < this.matrix.length; k++) {
+            this.matrix[k].splice(i_0, 1);
+        }
+        this.teams_runners_up.splice(i_0, 1);
+        this.teams_winners.splice(j_0, 1);
+        this.set_length(this.length() - 2);
+        this.last_runner_drawn = i_0;
+    }
+
+    sort_rows(matrix, permutation) {
+        // tri les lignes en fonction du score de chacune
+        const scores = [];
+        const perm = [...permutation];
+        for (let i = 0; i < matrix.length; i++) {
+            // calcul du score pour chaque ligne et tri
+            let sum = 0;
+            for (let j = 0; j < matrix[0].length; j++) {
+                sum += matrix[i][j] * Math.pow(2, j);
+            }
+            scores.push(sum);
+            let currentElement = scores[i];
+            let currentPerm = perm[i];
+            let j = i - 1;
+            while (j >= 0 && scores[j] > currentElement) {
+                scores[j + 1] = scores[j];
+                perm[j + 1] = perm[j];
+                j -= 1;
+            }
+            scores[j + 1] = currentElement;
+            perm[j + 1] = currentPerm;
+        }
+
+        const res = [];
+        for (let i = 0; i < matrix.length; i++) {
+            for (let k = 0; k < matrix.length; k++) {
+                if (perm[i] === permutation[k]) {
+                    res.push(matrix[k]);
+                }
+            }
+        }
+
+        // renvoie la matrice triÃ©e et les permutations
+        return { matrix: res, permutation: perm };
+    }
+
+    sort_col(matrix, permutation) {
+        // pareil avec les colonnes
+        const scores = [];
+        const perm = [...permutation];
+        for (let j = 0; j < matrix[0].length; j++) {
+            let sum = 0;
+            for (let i = 0; i < matrix.length; i++) {
+                sum += matrix[i][j] * Math.pow(2, i);
+            }
+            scores.push(sum);
+            let currentElement = scores[j];
+            let currentPerm = perm[j];
+            let k = j - 1;
+            while (k >= 0 && scores[k] > currentElement) {
+                scores[k + 1] = scores[k];
+                perm[k + 1] = perm[k];
+                k -= 1;
+            }
+            scores[k + 1] = currentElement;
+            perm[k + 1] = currentPerm;
+        }
+
+        const res = [];
+        for (let i = 0; i < matrix.length; i++) {
+            res.push([]);
+        }
+
+        for (let j = 0; j < perm.length; j++) {
+            for (let k = 0; k < permutation.length; k++) {
+                if (perm[j] === permutation[k]) {
+                    for (let i = 0; i < res.length; i++) {
+                        res[i].push(matrix[i][k]);
+                    }
+                }
+            }
+        }
+
+        return { matrix: res, permutation: perm };
+    }
+
+    index_eq_runner(runner, permutationCols) {
+        let trueInd = runner;
+        let ind = runner;
+        for (let i = 0; i < permutationCols.length; i++) {
+            for (let j = 0; j < permutationCols[i].length; j++) {
+                if (trueInd === permutationCols[i][j]) {
+                    ind = j;
+                }
+            }
+        }
+        return ind;
+    }
+
+    index_eq_winner(winner, permutationRows) {
+        let trueInd = winner;
+        let ind = winner;
+        for (let i = 0; i < permutationRows.length; i++) {
+            for (let j = 0; j < permutationRows[i].length; j++) {
+                if (trueInd === permutationRows[i][j]) {
+                    ind = j;
+                }
+            }
+        }
+        return ind;
+    }
+
+    isom() {
+        // calcule la matrice de l'isomorphisme
+        // avec les fonctions de tri
+        const permutationRows = [[...Array(this.matrix.length).keys()]];
+        const permutationCols = [[...Array(this.matrix.length).keys()]];
+        let end = false;
+        let mat1 = this.matrix.map(row => [...row]);
+
+        while (!end) {
+            const rows = [...permutationRows[permutationRows.length - 1]];
+            const cols = [...permutationCols[permutationCols.length - 1]];
+            const { matrix: mat2, permutation: permRows } = this.sort_rows(mat1, permutationRows[permutationRows.length - 1]);
+            const { matrix: mat3, permutation: permCols } = this.sort_col(mat2, permutationCols[permutationCols.length - 1]);
+
+            permutationRows.push(permRows);
+            permutationCols.push(permCols);
+
+            mat1 = mat3.map(row => [...row]);
+
+            end = true;
+
+            for (let i = 0; i < rows.length; i++) {
+                if (rows[i] !== permutationRows[permutationRows.length - 1][i]) {
+                    end = false;
+                }
+            }
+
+            for (let i = 0; i < cols.length; i++) {
+                if (cols[i] !== permutationCols[permutationCols.length - 1][i]) {
+                    end = false;
+                }
+            }
+        }
+
+        // renvoie la matrice et toutes les permutations
+        let binaryString = '';
+        for (const row of mat1) {
+            for (const element of row) {
+                binaryString += element.toString();
+            }
+        }
+        const q = parseInt(binaryString, 2);
+        return { q, permutationRows, permutationCols };
+    }
+
+    mat(data) {
+        const { q, permutationRows, permutationCols } = this.isom();
+        const table = [];
+
+        for (let i = 0; i < this.winners().length + 1; i++) {
+            table.push([]);
+        }
+
+        table[0].push(" ");
+
+        for (let line = 1; line < this.winners().length + 1; line++) {
+            table[line].push(this.winners()[line - 1]);
+        }
+
+        for (let col = 1; col < this.runners_up().length + 1; col++) {
+            table[0].push(this.runners_up()[col - 1]);
+        }
+
+        const key1 = `${q}`;
+        const runners = this.runners_up();
+        const winners = this.winners();
+
+        for (let i = 0; i < winners.length; i++) {
+            for (let j = 0; j < runners.length; j++) {
+                const runner = this.index_eq_runner(i, permutationCols);
+                const winner = this.index_eq_winner(j, permutationRows);
+                const draw = this.index_eq_runner(this.last_runner_drawn, permutationCols);
+
+                if (this.length() % 2 === 0) {
+                    const key2 = `${runner}, ${winner}`;
+                    if (key1 in data && key2 in data[key1]) {
+                        table[j + 1].push(data[key1][key2]);
+                    } else {
+                        console.log(`not, ${key1}, ${key2}`);
+                    }
+                } else {
+                    const key2 = `${runner}, ${winner}, ${draw}`;
+                    if (key1 in data && key2 in data[key1]) {
+                        table[j + 1].push(data[key1][key2]);
+                    }
+                }
+            }
+        }
+        const matrix = table.map(row => row.map(element => element));
+        return matrix;
+    }
+}
+
+G_init = new GraphBipartite([])
+team_1 = new Team("Napoli", "it", "A", "winner");
+team_2 = new Team("Liverpool", "en", "A", "runner up");
+team_3 = new Team("Porto", "pt", "B", "winner");
+team_4 = new Team("Brugge", "be", "B", "runner up");
+team_5 = new Team("Bayern", "de", "C", "winner");
+team_6 = new Team("Inter", "it", "C", "runner up");
+team_7 = new Team("Tottenham", "en", "D", "winner");
+team_8 = new Team("Frankfurt", "de", "D", "runner up");
+team_9 = new Team("Chelsea", "en", "E", "winner");
+team_10 = new Team("AC Milan", "it", "E", "runner up");
+team_11 = new Team("Real Madrid", "es", "F", "winner");
+team_12 = new Team("Leipzig", "de", "F", "runner up");
+team_13 = new Team("Manchester City", "en", "G", "winner");
+team_14 = new Team("Dortmund", "de", "G", "runner up");
+team_15 = new Team("Benfica", "pt", "H", "winner");
+team_16 = new Team("PSG", "fr", "H", "runner up");
+
+teams = [];
+
+teams.push(team_1);
+teams.push(team_2);
+teams.push(team_3);
+teams.push(team_4);
+teams.push(team_5);
+teams.push(team_6);
+teams.push(team_7);
+teams.push(team_8);
+teams.push(team_9);
+teams.push(team_10);
+teams.push(team_11);
+teams.push(team_12);
+teams.push(team_13);
+teams.push(team_14);
+teams.push(team_15);
+teams.push(team_16);
+
+teams.forEach(element => {
+    G_init.add_team(element)
+});
+let q, perm1, perm2 = G_init.isom()
+let proba = G_init.mat(resultat)[index_name("Bayern")+1][index_name("PSG")]
+console.log(proba)
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", function() {
     // Sélectionnez l'élément h1 par son ID
