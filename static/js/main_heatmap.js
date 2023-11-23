@@ -15,8 +15,8 @@ fetch(cheminVersJSON)
       console.log(q,perm1,perm2)
     let proba = resultat[String(q)][String(G_init.index_eq_runner(G_init.index_name("PSG"), perm2))+", "+G_init.index_eq_winner(G_init.index_name("Bayern"), perm1)]
     console.log(proba)
-      console.log("sort row: ", G_init.sort_rows())
-      console.log("sort col: ", G_init.sort_col())
+      //console.log("sort row: ", G_init.sort_rows())
+      //console.log("sort col: ", G_init.sort_col())
       console.log("matrice de base: ",G_init.matrix)
   })
   .catch(error => console.error('Erreur de chargement du fichier JSON', error));
