@@ -208,7 +208,7 @@ class GraphBipartite {
             }
             scores[k + 1] = currentElement;
             perm[k + 1] = currentPerm;
-            }
+        }
 
         let res = [];
         for (let i = 0; i < matrix.length; i++) {
@@ -301,10 +301,10 @@ class GraphBipartite {
         console.log(mat1)
 
         while (!end) {
-            const rows = [...permutationRows[permutationRows.length - 1]];
-            const cols = [...permutationCols[permutationCols.length - 1]];
-            const { matrix: mat2, permutation: permRows } = this.sort_rows(mat1, permutationRows[permutationRows.length - 1]);
-            const { matrix: mat3, permutation: permCols } = this.sort_col(mat2, permutationCols[permutationCols.length - 1]);
+            let rows = [...permutationRows[permutationRows.length - 1]];
+            let cols = [...permutationCols[permutationCols.length - 1]];
+            let { matrix: mat2, permutation: permRows } = this.sort_rows(mat1, permutationRows[permutationRows.length - 1]);
+            let { matrix: mat3, permutation: permCols } = this.sort_col(mat2, permutationCols[permutationCols.length - 1]);
 
             permutationRows.push(permRows);
             permutationCols.push(permCols);
@@ -328,8 +328,8 @@ class GraphBipartite {
 
         // renvoie la matrice et toutes les permutations
         let binaryString = '';
-        for (const row of mat1) {
-            for (const element of row) {
+        for (let row of mat1) {
+            for (let element of row) {
                 binaryString += element.toString();
             }
         }
