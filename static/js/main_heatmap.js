@@ -334,6 +334,7 @@ class GraphBipartite {
             }
         }
         console.log(binaryString)
+        console.log(binaire_to_deci(binaryString))
         let q = parseInt(binaryString, 2);
         return {'q': q, "permCol":permutationRows, "permRow":permutationCols };
     }
@@ -384,6 +385,19 @@ class GraphBipartite {
         const matrix = table.map(row => row.map(element => element));
         return matrix;
     }
+}
+
+// le binaire doit être en format string
+function binaire_to_deci(binaire){
+    let deci = 0;
+    let puissance = 0
+    let digit;
+    for(let i=0;i<binaire.length;i++){
+        digit = binaire[i]
+        puissance = 2**(binaire.length-i-1)
+        deci += parseInt(digit)
+    }
+    return deci
 }
 
 G_init = new GraphBipartite([])
