@@ -201,9 +201,9 @@ class GraphBipartite {
             let currentElement = scores[i];
             let currentPerm = perm[i];
             let k = i - 1;
-            while (k >= 0 && scores[j] > currentElement) {
-                scores[k + 1] = scores[j];
-                perm[k + 1] = perm[j];
+            while (k >= 0 && scores[k] > currentElement) {
+                scores[k + 1] = scores[k];
+                perm[k + 1] = perm[k];
                 k -= 1;
             }
             scores[k + 1] = currentElement;
