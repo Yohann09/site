@@ -17,6 +17,7 @@ fetch(cheminVersJSON)
     console.log(proba)
       console.log("sort row: ", G_init.sort_rows())
       console.log("sort col: ", G_init.sort_col())
+      console.log("matrice de base: ",G_init.matrix)
   })
   .catch(error => console.error('Erreur de chargement du fichier JSON', error));
 
