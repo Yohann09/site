@@ -334,7 +334,7 @@ class GraphBipartite {
             }
         }
         console.log(binaryString)
-        console.log(binaire_to_deci(binaryString))
+        console.log("avec ma fonction",binaire_to_deci(binaryString))
         let q = parseInt(binaryString, 2);
         return {'q': q, "permCol":permutationRows, "permRow":permutationCols };
     }
@@ -392,6 +392,7 @@ function binaire_to_deci(binaire){
     let deci = 0;
     let puissance = 0
     let digit;
+    console.log("longueur de la chaine: ",binaire.length)
     for(let i=0;i<binaire.length;i++){
         digit = binaire[i]
         puissance = 2**(binaire.length-i-1)
