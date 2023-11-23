@@ -9,9 +9,9 @@ fetch(cheminVersJSON)
     console.log("on a chargé les données");
     resultat=data;
     let result = G_init.isom()
-      let q=result[0]
-      let perm1=result[1]
-      let perm2=result[2]
+      let q=result.q
+      let perm1=result.permCol
+      let perm2=result.permRow
       console.log(q,perm1,perm2)
     let proba = resultat[String(q)][String(G_init.index_eq_runner(G_init.index_name("PSG"), perm2))+", "+G_init.index_eq_winner(G_init.index_name("Bayern"), perm1)]
     console.log(proba)
@@ -325,7 +325,7 @@ class GraphBipartite {
             }
         }
         const q = parseInt(binaryString, 2);
-        return { q, permutationRows, permutationCols };
+        return {'q': q, "permCol":permutationRows, "permRow":permutationCols };
     }
 
     mat(data) {
