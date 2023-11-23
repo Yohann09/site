@@ -189,8 +189,8 @@ class GraphBipartite {
 
     sort_rows(matrix, permutation) {
         // tri les lignes en fonction du score de chacune
-        const scores = [];
-        const perm = [...permutation];
+        let scores = [];
+        let perm = [...permutation];
         for (let i = 0; i < matrix.length; i++) {
             // calcul du score pour chaque ligne et tri
             let sum = 0;
