@@ -101,7 +101,7 @@ class GraphBipartite {
     }
 
     add_team(team) {
-        // pour mettre les Ã©quipes au dÃ©but
+        // pour mettre les équipes au début
         if (team.set() === "runner up") {
             this.teams_runners_up.push(team.name());
             for (let i = 0; i < this.winners().length; i++) {
@@ -297,6 +297,7 @@ class GraphBipartite {
         const permutationCols = [[...Array(this.matrix.length).keys()]];
         let end = false;
         let mat1 = this.matrix.map(row => [...row]);
+        console.log(mat1)
 
         while (!end) {
             const rows = [...permutationRows[permutationRows.length - 1]];
