@@ -333,6 +333,7 @@ class GraphBipartite {
                 binaryString += element.toString();
             }
         }
+        console.log(binaryString)
         let q = parseInt(binaryString, 2);
         return {'q': q, "permCol":permutationRows, "permRow":permutationCols };
     }
