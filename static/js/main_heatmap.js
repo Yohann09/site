@@ -199,11 +199,11 @@ class GraphBipartite {
                 scores.push(sum);
                 let currentElement = scores[i];
                 let currentPerm = perm[i];
-                let j = i - 1;
-                while (j >= 0 && scores[j] > currentElement) {
-                    scores[j + 1] = scores[j];
-                    perm[j + 1] = perm[j];
-                    j -= 1;
+                let k = i - 1;
+                while (k >= 0 && scores[j] > currentElement) {
+                    scores[k + 1] = scores[j];
+                    perm[k + 1] = perm[j];
+                    k -= 1;
                 }
                 scores[j + 1] = currentElement;
                 perm[j + 1] = currentPerm;
@@ -241,8 +241,8 @@ class GraphBipartite {
                     perm[k + 1] = perm[k];
                     k -= 1;
                 }
-                scores[k + 1] = currentElement;
-                perm[k + 1] = currentPerm;
+                scores[j + 1] = currentElement;
+                perm[j + 1] = currentPerm;
             }
         }
 
