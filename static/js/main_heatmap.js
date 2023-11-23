@@ -294,8 +294,8 @@ class GraphBipartite {
     isom() {
         // calcule la matrice de l'isomorphisme
         // avec les fonctions de tri
-        const permutationRows = [[...Array(this.matrix.length).keys()]];
-        const permutationCols = [[...Array(this.matrix.length).keys()]];
+        let permutationRows = [[...Array(this.matrix.length).keys()]];
+        let permutationCols = [[...Array(this.matrix.length).keys()]];
         let end = false;
         let mat1 = this.matrix.map(row => [...row]);
         console.log(mat1)
@@ -333,7 +333,7 @@ class GraphBipartite {
                 binaryString += element.toString();
             }
         }
-        const q = parseInt(binaryString, 2);
+        let q = parseInt(binaryString, 2);
         return {'q': q, "permCol":permutationRows, "permRow":permutationCols };
     }
 
