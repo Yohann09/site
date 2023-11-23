@@ -85,8 +85,12 @@ class GraphBipartite {
         this._length = num;
     }
 
+    affiche_matrix(){
+        console.log(this.matrix)
+    }
+
     copy_graph() {
-        // pour crÃ©er un autre graph avec les mÃªmes composants
+        // pour créer un autre graph avec les mÃªmes composants
         const matrix2 = this.matrix.map(line => line.slice());
         const runners_up2 = this.runners_up().slice();
         const winners2 = this.winners().slice();
@@ -936,4 +940,4 @@ for(let i=0; i<Runners_up.length; i++){
 }
 verif_zero()
 
-console.log("matrice de base: ",G_init.matrix)
+console.log("matrice de base: ",G_init.affiche_matrix())
