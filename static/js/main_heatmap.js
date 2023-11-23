@@ -196,21 +196,21 @@ class GraphBipartite {
             let sum = 0;
             for (let j = 0; j < matrix[0].length; j++) {
                 sum += matrix[i][j] * Math.pow(2, j);
+                scores.push(sum);
+                let currentElement = scores[i];
+                let currentPerm = perm[i];
+                let j = i - 1;
+                while (j >= 0 && scores[j] > currentElement) {
+                    scores[j + 1] = scores[j];
+                    perm[j + 1] = perm[j];
+                    j -= 1;
+                }
+                scores[j + 1] = currentElement;
+                perm[j + 1] = currentPerm;
             }
-            scores.push(sum);
-            let currentElement = scores[i];
-            let currentPerm = perm[i];
-            let j = i - 1;
-            while (j >= 0 && scores[j] > currentElement) {
-                scores[j + 1] = scores[j];
-                perm[j + 1] = perm[j];
-                j -= 1;
-            }
-            scores[j + 1] = currentElement;
-            perm[j + 1] = currentPerm;
         }
 
-        const res = [];
+        let res = [];
         for (let i = 0; i < matrix.length; i++) {
             for (let k = 0; k < matrix.length; k++) {
                 if (perm[i] === permutation[k]) {
@@ -232,18 +232,18 @@ class GraphBipartite {
             let sum = 0;
             for (let i = 0; i < matrix.length; i++) {
                 sum += matrix[i][j] * Math.pow(2, i);
+                scores.push(sum);
+                let currentElement = scores[j];
+                let currentPerm = perm[j];
+                let k = j - 1;
+                while (k >= 0 && scores[k] > currentElement) {
+                    scores[k + 1] = scores[k];
+                    perm[k + 1] = perm[k];
+                    k -= 1;
+                }
+                scores[k + 1] = currentElement;
+                perm[k + 1] = currentPerm;
             }
-            scores.push(sum);
-            let currentElement = scores[j];
-            let currentPerm = perm[j];
-            let k = j - 1;
-            while (k >= 0 && scores[k] > currentElement) {
-                scores[k + 1] = scores[k];
-                perm[k + 1] = perm[k];
-                k -= 1;
-            }
-            scores[k + 1] = currentElement;
-            perm[k + 1] = currentPerm;
         }
 
         const res = [];
