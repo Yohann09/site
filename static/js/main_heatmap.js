@@ -396,7 +396,7 @@ function binaire_to_deci(binaire){
     for(let i=0;i<binaire.length;i++){
         digit = binaire[i]
         puissance = 2**(binaire.length-i-1)
-        deci += parseInt(digit)
+        deci += parseInt(digit)*puissance
     }
     return deci
 }
