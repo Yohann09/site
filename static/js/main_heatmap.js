@@ -216,6 +216,7 @@ class GraphBipartite {
         }
 
         // renvoie la matrice triÃ©e et les permutations
+        console.log(res)
         return { matrix: res, permutation: perm };
     }
 
@@ -255,7 +256,7 @@ class GraphBipartite {
                 }
             }
         }
-
+        console.log("dans col: ",res)
         return { matrix: res, permutation: perm };
     }
 
