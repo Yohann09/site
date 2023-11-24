@@ -13,7 +13,7 @@ fetch(cheminVersJSON)
       let perm1=result.permCol
       let perm2=result.permRow
       console.log(q,perm1,perm2)
-    let proba = resultat[String(q)][String(G_init.index_eq_runner(G_init.index_name("PSG"), perm2))+", "+G_init.index_eq_winner(G_init.index_name("Bayern"), perm1)]
+    let proba = resultat[q][String(G_init.index_eq_runner(G_init.index_name("PSG"), perm2))+", "+G_init.index_eq_winner(G_init.index_name("Bayern"), perm1)]
     console.log(proba)
       //console.log("sort row: ", G_init.sort_rows())
       //console.log("sort col: ", G_init.sort_col())
@@ -333,9 +333,15 @@ class GraphBipartite {
                 binaryString += element.toString();
             }
         }
-        console.log(binaryString)
-        console.log("avec ma fonction",binaire_to_deci(binaryString))
-        let q = parseInt(binaryString, 2);
+        //console.log(binaryString)
+        //console.log("avec ma fonction",binaire_to_deci(binaryString))
+        //let q = parseInt(binaryString, 2);
+        let q;
+        if(binaryString.length<=32){
+            q=String(parseInt(binaryString,2))
+        }else{
+            q="("+String(parseInt(binaryString.slice(0,32)),2)+", "+String(parseInt(binaryString.slice(32,binaryString.length)),2)
+        }
         return {'q': q, "permCol":permutationRows, "permRow":permutationCols };
     }
 
