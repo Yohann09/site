@@ -340,7 +340,7 @@ class GraphBipartite {
         if(binaryString.length<=32){
             q=String(parseInt(binaryString,2))
         }else{
-            q="("+String(parseInt(binaryString.slice(0,32),2))+", "+String(parseInt(binaryString.slice(32,binaryString.length),2))
+            q="("+String(parseInt(binaryString.slice(0,32),2))+", "+String(parseInt(binaryString.slice(32,binaryString.length),2))+")"
         }
         return {'q': q, "permCol":permutationRows, "permRow":permutationCols };
     }
