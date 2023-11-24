@@ -34,7 +34,8 @@ function fill_all(){
             let permR=result.permRow
             let proba_number;
             if(chosen_team.length%2===0 && chosen_team.length>0){
-                let index_runner = G_init.index_name())
+                let index_runner = G_init.index_name(changeSpaceby_(chosen_team[chosen_team.length-2].textContent),permR)
+                let index_winner = G_init.index_name(changeSpaceby_(chosen_team[chosen_team.length-1].textContent),permC)
                 G_init.remove_2t("index du runner up", index du winner)
                 for(let i=0;i<Winners.length;i++) {
                     for (let j = 0; j < Runners_up.length; j++) {
@@ -45,13 +46,22 @@ function fill_all(){
                     }
                 }
             }else if(chosen_team.length%2===1) {
-                let team_cond = String(G_init.index_eq_runner(G_init.index_name(chosen_team[chosen_team.length-1].textContent), permR))
+                let team_cond = String(G_init.index_eq_runner(G_init.index_name(changeSpaceby_(chosen_team[chosen_team.length-1].textContent)), permR))
                 for (let i = 0; i < Winners.length; i++) {
                     for (let j = 0; j < Runners_up.length; j++) {
                         let id = Runners_up[i] + " " + Winners[j]
                         let cell = document.getElementById(id)
                         proba_number = resultat[q][String(G_init.index_eq_runner(G_init.index_name(Runners_up[i]), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(Winners[j]), permC) + ", " + String(G_init.index_eq_runner(G_init.index_name(team_cond), permR))]
                         cell.textContent = String(proba_number) + "%"
+                    }
+                }
+            }else{
+                for(let i=0;i<Winners.length;i++) {
+                    for (let j = 0; j < Runners_up.length; j++) {
+                        let id = Runners_up[i] + " " + Winners[j]
+                        let cell = document.getElementById(id)
+                        proba_number = resultat[q][String(G_init.index_eq_runner(G_init.index_name(Runners_up[i]), permR))+", "+G_init.index_eq_winner(G_init.index_name(Winners[j]), permC)]
+                        cell.textContent = String(proba_number)+"%"
                     }
                 }
             }
