@@ -46,7 +46,7 @@ function fill_all(){
                     }
                 }
             }else if(chosen_team.length%2===1) {
-                let team_cond = String(G_init.index_eq_runner(G_init.index_name(changeSpaceby_(chosen_team[chosen_team.length-1].textContent)), permR))
+                let team_cond = String(G_init.index_eq_runner(G_init.index_name(chosen_team[chosen_team.length-1].textContent), permR))
                 for (let i = 0; i < Winners.length; i++) {
                     for (let j = 0; j < Runners_up.length; j++) {
                         let id = Runners_up[i] + " " + Winners[j]
