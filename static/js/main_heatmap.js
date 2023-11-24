@@ -34,6 +34,8 @@ function fill_all(){
             let permR=result.permRow
             let proba_number;
             if(chosen_team.length%2===0 && chosen_team.length>0){
+                let index_runner = G_init.index_name())
+                G_init.remove_2t("index du runner up", index du winner)
                 for(let i=0;i<Winners.length;i++) {
                     for (let j = 0; j < Runners_up.length; j++) {
                         let id = Runners_up[i] + " " + Winners[j]
@@ -980,9 +982,10 @@ for(let i=0; i<Runners_up.length; i++){
         }else{
             let cell = document.createElement("td")
             // cell.textContent = String(i)+String(j)   // ce que je faisais avant de mettre les probas
+            cell.textContent = "..."
             // code pour l'id des cellules de proba: runners_up en premier, puis winner séparé par un espace
-            //cell.id =  Runners_up[i]+" "+ Winners[j-1]
-            //cell.className = "proba-cell " + Winners[j-1] +" "+ Runners_up[i] // ajoute une classe pour que la cellule s'illumine quand équipe sélectionnée
+            cell.id =  Runners_up[i]+" "+ Winners[j-1]
+            cell.className = "proba-cell " + Winners[j-1] +" "+ Runners_up[i] // ajoute une classe pour que la cellule s'illumine quand équipe sélectionnée
             //change_proba(cell,"('Liverpool', 'Brugge', 'Inter', 'Frankfurt', 'AC Milan', 'Leipzig', 'Dortmund', 'PSG'), ('Napoli', 'Porto', 'Bayern', 'Tottenham', 'Chelsea', 'Real Madrid', 'Manchester City', 'Benfica')",change_bySpace(Runners_up[i])+", "+change_bySpace(Winners[j-1]))
             line.appendChild(cell)
         }
