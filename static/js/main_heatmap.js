@@ -3,6 +3,7 @@
 // Remplacez le chemin par le chemin absolu vers votre fichier JSON
 const cheminVersJSON = "static/isom.json";
 let resultat;
+console.log("avant le test voila resultat: ",resultat)
 fetch(cheminVersJSON)
   .then(response => response.json())
   .then(data => {
@@ -27,7 +28,31 @@ function fill_all(){
     fetch(cheminVersJSON)
         .then(response=>response.json())
         .then (resultat=> {
-
+            let result = G_init.isom()
+            let q=result.q
+            let permC=result.permCol
+            let permR=result.permRow
+            let proba_number;
+            if(chosen_team.length%2===0 && chosen_team.length>0){
+                for(let i=0;i<Winners.length;i++) {
+                    for (let j = 0; j < Runners_up.length; j++) {
+                        let id = Runners_up[i] + " " + Winners[j]
+                        let cell = document.getElementById(id)
+                        proba_number = resultat[q][String(G_init.index_eq_runner(G_init.index_name(Runners_up[i]), permR))+", "+G_init.index_eq_winner(G_init.index_name(Winners[j]), permC)]
+                        cell.textContent = String(proba_number)+"%"
+                    }
+                }
+            }else if(chosen_team.length%2===1) {
+                let team_cond = String(G_init.index_eq_runner(G_init.index_name(chosen_team[chosen_team.length-1].textContent), permR))
+                for (let i = 0; i < Winners.length; i++) {
+                    for (let j = 0; j < Runners_up.length; j++) {
+                        let id = Runners_up[i] + " " + Winners[j]
+                        let cell = document.getElementById(id)
+                        proba_number = resultat[q][String(G_init.index_eq_runner(G_init.index_name(Runners_up[i]), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(Winners[j]), permC) + ", " + String(G_init.index_eq_runner(G_init.index_name(team_cond), permR))]
+                        cell.textContent = String(proba_number) + "%"
+                    }
+                }
+            }
         })
 
 }
