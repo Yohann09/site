@@ -13,9 +13,9 @@ fetch(cheminVersJSON)
       let q=result.q
       let perm1=result.permCol
       let perm2=result.permRow
-      console.log(q,perm1,perm2)
+      //console.log(q,perm1,perm2)
     let proba = resultat[q][String(G_init.index_eq_runner(G_init.index_name("PSG"), perm2))+", "+G_init.index_eq_winner(G_init.index_name("Bayern"), perm1)]
-    console.log(proba)
+    //console.log(proba)
   })
   .catch(error => console.error('Erreur de chargement du fichier JSON', error));
 
@@ -122,10 +122,6 @@ class GraphBipartite {
         this._length = num;
     }
 
-    affiche_matrix(){
-        console.log(this.matrix)
-    }
-
     copy_graph() {
         // pour créer un autre graph avec les mÃªmes composants
         const matrix2 = this.matrix.map(line => line.slice());
@@ -177,7 +173,7 @@ class GraphBipartite {
                 return i;
             }
         }
-        console.log("wsh");
+        console.log("error in index_teams");
     }
 
     index_runner(runner) {
@@ -212,7 +208,7 @@ class GraphBipartite {
     remove_2t(i_0, j_0) {
         // enlever 2 club du graph
         if (j_0 >= this.winners().length) {
-            console.log("chelou");
+            console.log("erreur dans remove_2t");
         }
         this.matrix.splice(j_0, 1);
         for (let k = 0; k < this.matrix.length; k++) {
@@ -257,7 +253,6 @@ class GraphBipartite {
         }
 
         // renvoie la matrice triÃ©e et les permutations
-        console.log(res)
         return { matrix: res, permutation: perm };
     }
 
@@ -298,7 +293,6 @@ class GraphBipartite {
                 }
             }
         }
-        console.log("dans col: ",res)
         return { matrix: res, permutation: perm };
     }
 
@@ -335,7 +329,6 @@ class GraphBipartite {
         let permutationCols = [[...Array(this.matrix.length).keys()]];
         let end = false;
         let mat1 = this.matrix.map(row => [...row]);
-        console.log(mat1)
 
         while (!end) {
             let rows = [...permutationRows[permutationRows.length - 1]];
@@ -370,9 +363,6 @@ class GraphBipartite {
                 binaryString += element.toString();
             }
         }
-        //console.log(binaryString)
-        //console.log("avec ma fonction",binaire_to_deci(binaryString))
-        //let q = parseInt(binaryString, 2);
         let q;
         if(binaryString.length<=32){
             q=String(parseInt(binaryString,2))
@@ -435,7 +425,6 @@ function binaire_to_deci(binaire){
     let deci = 0;
     let puissance = 0
     let digit;
-    console.log("longueur de la chaine: ",binaire.length)
     for(let i=0;i<binaire.length;i++){
         digit = binaire[i]
         puissance = 2**(binaire.length-i-1)
@@ -805,7 +794,8 @@ function add_team_to_list_match(bouton){
     chosen_team.push(bouton)    // Rajoute l'équipe dans les équipes choisies
     // J'actualise toutes les probas
     if(chosen_team.length<Runners_up.length+Winners.length-3) {
-        change_all()
+        //change_all()
+        fill_all()
     }
     // Ajoute la liste des matchs en fonction des clics de l'utilisateur
     let number = chosen_team.length
@@ -926,7 +916,8 @@ undo_button.addEventListener("click", function(event){
         let j = Math.floor((number-1)/2)
         let cell = document.getElementById(String(j)+"_"+String(i))
         cell.textContent= default_cell_match
-        change_all()
+        //change_all()
+        fill_all()
         if(affichage_heatmap){
             heatmap()
         }else{
@@ -990,15 +981,15 @@ for(let i=0; i<Runners_up.length; i++){
             let cell = document.createElement("td")
             // cell.textContent = String(i)+String(j)   // ce que je faisais avant de mettre les probas
             // code pour l'id des cellules de proba: runners_up en premier, puis winner séparé par un espace
-            cell.id =  Runners_up[i]+" "+ Winners[j-1]
-            cell.className = "proba-cell " + Winners[j-1] +" "+ Runners_up[i] // ajoute une classe pour que la cellule s'illumine quand équipe sélectionnée
-            change_proba(cell,"('Liverpool', 'Brugge', 'Inter', 'Frankfurt', 'AC Milan', 'Leipzig', 'Dortmund', 'PSG'), ('Napoli', 'Porto', 'Bayern', 'Tottenham', 'Chelsea', 'Real Madrid', 'Manchester City', 'Benfica')",change_bySpace(Runners_up[i])+", "+change_bySpace(Winners[j-1]))
+            //cell.id =  Runners_up[i]+" "+ Winners[j-1]
+            //cell.className = "proba-cell " + Winners[j-1] +" "+ Runners_up[i] // ajoute une classe pour que la cellule s'illumine quand équipe sélectionnée
+            //change_proba(cell,"('Liverpool', 'Brugge', 'Inter', 'Frankfurt', 'AC Milan', 'Leipzig', 'Dortmund', 'PSG'), ('Napoli', 'Porto', 'Bayern', 'Tottenham', 'Chelsea', 'Real Madrid', 'Manchester City', 'Benfica')",change_bySpace(Runners_up[i])+", "+change_bySpace(Winners[j-1]))
             line.appendChild(cell)
         }
     }
     line.className = "proba-line"
     table.appendChild(line)
 }
+fill_all()
 verif_zero()
 
-console.log("matrice de base: ",G_init.affiche_matrix())
