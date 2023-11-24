@@ -36,7 +36,7 @@ function fill_all(){
             if(chosen_team.length%2===0 && chosen_team.length>0){
                 let index_runner = G_init.index_name(changeSpaceby_(chosen_team[chosen_team.length-2].textContent),permR)
                 let index_winner = G_init.index_name(changeSpaceby_(chosen_team[chosen_team.length-1].textContent),permC)
-                G_init.remove_2t("index du runner up", index du winner)
+                G_init.remove_2t(index_runner, index_winner)
                 for(let i=0;i<Winners.length;i++) {
                     for (let j = 0; j < Runners_up.length; j++) {
                         let id = Runners_up[i] + " " + Winners[j]
