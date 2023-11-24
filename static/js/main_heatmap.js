@@ -52,7 +52,7 @@ function fill_all(){
                     for (let j = 0; j < Runners_up.length; j++) {
                         let id = Runners_up[i] + " " + Winners[j]
                         let cell = document.getElementById(id)
-                        console.log(String(G_init.index_eq_runner(G_init.index_name(Runners_up[i]), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(Winners[j]), permC) + ", " + team_cond)
+                        console.log(String(G_init.index_eq_runner(G_init.index_name(change_bySpace(Runners_up[i])), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(change_bySpace(Winners[j])), permC) + ", " + team_cond)
                         proba_number = resultat[q][String(G_init.index_eq_runner(G_init.index_name(Runners_up[i]), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(Winners[j]), permC) + ", " +team_cond]
                         cell.textContent = String(proba_number) + "%"
                     }
