@@ -889,7 +889,6 @@ undo_button.addEventListener("click", function(event){
             G_init.add_team(last)
             G_init.add_team(before_last)
         }
-        G_init.add_team(chosen_team[chosen_team.length-1])
         let last_team_chosen = chosen_team.pop()
         let selecteur = "."+changeSpaceby_(last_team_chosen.textContent)
         let colorChange = document.querySelectorAll(selecteur)
