@@ -38,10 +38,13 @@ function fill_all(){
                 let q=result.q
                 let permC=result.permCol
                 let permR=result.permRow
+                console.log("q: ",q)
                 for(let i=0;i<Winners.length;i++){
                     for (let j = 0; j < Runners_up.length; j++) {
                         let id = Runners_up[i] + " " + Winners[j]
                         let cell = document.getElementById(id)
+                        console.log("nombre paire: ", Runners_up[i] + " " + Winners[j])
+                        console.log(String(G_init.index_eq_runner(G_init.index_name(change_bySpace(Runners_up[i])), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(change_bySpace(Winners[j])), permC))
                         proba_number = resultat[q][String(G_init.index_eq_runner(G_init.index_name(change_bySpace(Runners_up[i])), permR))+", "+G_init.index_eq_winner(G_init.index_name(change_bySpace(Winners[j])), permC)]
                         cell.textContent = String(proba_number)+"%"
                     }
@@ -57,7 +60,7 @@ function fill_all(){
                     for (let j = 0; j < Runners_up.length; j++) {
                         let id = Runners_up[i] + " " + Winners[j]
                         let cell = document.getElementById(id)
-                        console.log(String(G_init.index_eq_runner(G_init.index_name(change_bySpace(Runners_up[i])), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(change_bySpace(Winners[j])), permC) + ", " + team_cond)
+                        //console.log(String(G_init.index_eq_runner(G_init.index_name(change_bySpace(Runners_up[i])), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(change_bySpace(Winners[j])), permC) + ", " + team_cond)
                         proba_number = resultat[q][String(G_init.index_eq_runner(G_init.index_name(change_bySpace(Runners_up[i])), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(change_bySpace(Winners[j])), permC) + ", " +team_cond]
                         cell.textContent = String(proba_number) + "%"
                     }
