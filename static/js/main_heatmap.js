@@ -28,16 +28,16 @@ function fill_all(){
     fetch(cheminVersJSON)
         .then(response=>response.json())
         .then (resultat=> {
-            let result = G_init.isom()
-            let q=result.q
-            let permC=result.permCol
-            let permR=result.permRow
             let proba_number;
             if(chosen_team.length%2===0 && chosen_team.length>0){
                 let index_runner = G_init.index_name(changeSpaceby_(chosen_team[chosen_team.length-2].textContent),permR)
                 let index_winner = G_init.index_name(changeSpaceby_(chosen_team[chosen_team.length-1].textContent),permC)
                 G_init.remove_2t(index_runner, index_winner)
-                for(let i=0;i<Winners.length;i++) {
+                let result = G_init.isom()
+                let q=result.q
+                let permC=result.permCol
+                let permR=result.permRow
+                for(let i=0;i<Winners.length;i++){
                     for (let j = 0; j < Runners_up.length; j++) {
                         let id = Runners_up[i] + " " + Winners[j]
                         let cell = document.getElementById(id)
@@ -46,6 +46,10 @@ function fill_all(){
                     }
                 }
             }else if(chosen_team.length%2===1) {
+                let result = G_init.isom()
+                let q=result.q
+                let permC=result.permCol
+                let permR=result.permRow
                 console.log(chosen_team[chosen_team.length-1].textContent)
                 let team_cond = String(G_init.index_eq_runner(G_init.index_name(chosen_team[chosen_team.length-1].textContent), permR))
                 for (let i = 0; i < Winners.length; i++) {
@@ -58,6 +62,10 @@ function fill_all(){
                     }
                 }
             }else{
+                let result = G_init.isom()
+                let q=result.q
+                let permC=result.permCol
+                let permR=result.permRow
                 for(let i=0;i<Winners.length;i++) {
                     for (let j = 0; j < Runners_up.length; j++) {
                         let id = Runners_up[i] + " " + Winners[j]
@@ -221,7 +229,7 @@ class GraphBipartite {
     }
 
     remove_2t(i_0, j_0) {
-        // enlever 2 club du graph
+        // enlever 2 clubs du graphe
         if (j_0 >= this.winners().length) {
             console.log("erreur dans remove_2t");
         }
