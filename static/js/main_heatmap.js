@@ -40,8 +40,8 @@ function fill_all(){
                 G_init.remove_2t(index_runner, index_winner)
                 let result = G_init.isom()
                 let q=result.q
-                let permC=result.permCol
-                let permR=result.permRow
+                permC=result.permCol
+                permR=result.permRow
                 console.log("q: ",q)
                 for(let i=0;i<Winners.length;i++){
                     for (let j = 0; j < Runners_up.length; j++) {
@@ -54,10 +54,6 @@ function fill_all(){
                     }
                 }
             }else if(chosen_team.length%2===1) {
-                let result = G_init.isom()
-                let q=result.q
-                let permC=result.permCol
-                let permR=result.permRow
                 console.log(chosen_team[chosen_team.length-1].textContent)
                 let team_cond = String(G_init.index_eq_runner(G_init.index_name(chosen_team[chosen_team.length-1].textContent), permR))
                 for (let i = 0; i < Winners.length; i++) {
@@ -70,10 +66,6 @@ function fill_all(){
                     }
                 }
             }else{
-                let result = G_init.isom()
-                let q=result.q
-                let permC=result.permCol
-                let permR=result.permRow
                 for(let i=0;i<Winners.length;i++) {
                     for (let j = 0; j < Runners_up.length; j++) {
                         let id = Runners_up[i] + " " + Winners[j]
