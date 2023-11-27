@@ -930,7 +930,7 @@ undo_button.addEventListener("click", function(event){
                 let index2 = give_index2(changeSpaceby_(bouton.textContent),changeSpaceby_(runner))
                 //console.log(index2)
                 if(cell){
-                    let nombre = resultat[index][index2]
+                    let nombre = Number(cell.textContent.slice(0,-1));// = resultat[index][index2]
                     if(nombre!==0){
                         bouton.style.display="block"
                     }
