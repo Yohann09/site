@@ -877,11 +877,11 @@ optionsContainer.appendChild(undoSection)
 undo_button.addEventListener("click", function(event){
     if(chosen_team.length !== 0){
         if(chosen_team.length%2==0){
-            console.log(change_bySpace(chosen_team[chosen_team.length-2]))
-            console.log(change_bySpace(chosen_team[chosen_team.length-1]))
+            console.log(change_bySpace(chosen_team[chosen_team.length-2].textContent))
+            console.log(change_bySpace(chosen_team[chosen_team.length-1].textContent))
             console.log("teams:",G_init.teams())
-            let last = G_init.teams()[G_init.index_teams(change_bySpace(chosen_team[chosen_team.length-1]))]
-            let before_last = G_init.teams()[G_init.index_teams(change_bySpace(chosen_team[chosen_team.length-2]))]
+            let last = G_init.teams()[G_init.index_teams(change_bySpace(chosen_team[chosen_team.length-1].textContent))]
+            let before_last = G_init.teams()[G_init.index_teams(change_bySpace(chosen_team[chosen_team.length-2].textContent))]
             console.log(last)
             console.log(before_last)
             G_init.add_team(last)
