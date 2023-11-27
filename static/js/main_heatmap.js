@@ -124,7 +124,6 @@ class GraphBipartite {
         }
         this.last_runner_drawn = " ";
     }
-
     runners_up() {
         return this.teams_runners_up;
     }
@@ -198,6 +197,7 @@ class GraphBipartite {
         }
         console.log("error in index_teams");
     }
+
 
     index_runner(runner) {
         for (let k = 0; k < this.runners_up().length; k++) {
@@ -876,6 +876,13 @@ optionsContainer.appendChild(undoSection)
 // Touche pour revenir en arrière, enlever la dernière équipe ajoutée
 undo_button.addEventListener("click", function(event){
     if(chosen_team.length !== 0){
+        if(chosen_team.length%2==0){
+            let last = G_init.teams()[G_init.index_teams(chosen_team[chosen_team.length-1])]
+            let before_last = G_init.teams()[G_init.index_teams(chosen_team[chosen_team.length-2])]
+            G_init.add_team(last)
+            G_init.add_team(before_last)
+        }
+        G_init.add_team(chosen_team[chosen_team.length-1])
         let last_team_chosen = chosen_team.pop()
         let selecteur = "."+changeSpaceby_(last_team_chosen.textContent)
         let colorChange = document.querySelectorAll(selecteur)
