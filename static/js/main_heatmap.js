@@ -4,6 +4,7 @@
 const cheminVersJSON = "static/isom.json";
 let resultat;
 console.log("avant le test voila resultat: ",resultat)
+/*
 fetch(cheminVersJSON)
   .then(response => response.json())
   .then(data => {
@@ -18,7 +19,7 @@ fetch(cheminVersJSON)
     //console.log(proba)
   })
   .catch(error => console.error('Erreur de chargement du fichier JSON', error));
-
+*/
 console.log("petit test: ", resultat)
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /* Fonction qui fait l'appel à la base de donnée pour charger la base de donnée et renvoie un dictionnaire
