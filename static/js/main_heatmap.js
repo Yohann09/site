@@ -883,7 +883,9 @@ undo_button.addEventListener("click", function(event){
             let last = G_init.teams()[G_init.index_teams(change_bySpace(chosen_team[chosen_team.length-1].textContent))]
             let before_last = G_init.teams()[G_init.index_teams(change_bySpace(chosen_team[chosen_team.length-2].textContent))]
             console.log(last)
+            console.log(last.set())
             console.log(before_last)
+            console.log(before_last.set())
             G_init.add_team(last)
             G_init.add_team(before_last)
         }
