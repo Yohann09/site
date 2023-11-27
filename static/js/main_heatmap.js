@@ -34,6 +34,7 @@ function fill_all(){
             let permC=result.permCol
             let permR=result.permRow
             let proba_number;
+            console.log("avant le if : ",q)
             if(chosen_team.length%2===0 && chosen_team.length>0){
                 let index_runner = G_init.index_name(change_bySpace(chosen_team[chosen_team.length-2].textContent),permR)
                 let index_winner = G_init.index_name(change_bySpace(chosen_team[chosen_team.length-1].textContent),permC)
@@ -42,13 +43,13 @@ function fill_all(){
                 q=result.q
                 permC=result.permCol
                 permR=result.permRow
-                console.log("q: ",q)
+                console.log("q quand nombre paire: ",q)
                 for(let i=0;i<Winners.length;i++){
                     for (let j = 0; j < Runners_up.length; j++) {
                         let id = Runners_up[i] + " " + Winners[j]
                         let cell = document.getElementById(id)
-                        console.log("nombre paire: ", Runners_up[i] + " " + Winners[j])
-                        console.log(String(G_init.index_eq_runner(G_init.index_name(change_bySpace(Runners_up[i])), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(change_bySpace(Winners[j])), permC))
+                        //console.log("nombre paire: ", Runners_up[i] + " " + Winners[j])
+                        //console.log(String(G_init.index_eq_runner(G_init.index_name(change_bySpace(Runners_up[i])), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(change_bySpace(Winners[j])), permC))
                         proba_number = resultat[q][String(G_init.index_eq_runner(G_init.index_name(change_bySpace(Runners_up[i])), permR))+", "+G_init.index_eq_winner(G_init.index_name(change_bySpace(Winners[j])), permC)]
                         cell.textContent = String(proba_number)+"%"
                     }
