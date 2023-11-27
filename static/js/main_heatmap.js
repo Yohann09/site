@@ -38,8 +38,8 @@ function fill_all(){
                 let index_runner = G_init.index_name(changeSpaceby_(chosen_team[chosen_team.length-2].textContent),permR)
                 let index_winner = G_init.index_name(changeSpaceby_(chosen_team[chosen_team.length-1].textContent),permC)
                 G_init.remove_2t(index_runner, index_winner)
-                let result = G_init.isom()
-                let q=result.q
+                result = G_init.isom()
+                q=result.q
                 permC=result.permCol
                 permR=result.permRow
                 console.log("q: ",q)
