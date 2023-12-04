@@ -1,18 +1,19 @@
 // Test du chargement des probas:
 
 // Remplacez le chemin par le chemin absolu vers votre fichier JSON
-const cheminVersJSON = "static/isom.json";
+const url = "static/isom.json";
 let resultat;
-
-const url = "data.json";
 
 const request = new Request(url);
 
 fetch(request).then((response) => {
   const data = response.json();
-
-  // Utiliser les données
 });
+const data = await fetch(url);
+
+const name = data["(4275158523, 2813304703)"]["1, 4, 1"];
+
+console.log(name); // John Doe
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /* Fonction qui fait l'appel à la base de donnée pour charger la base de donnée et renvoie un dictionnaire
