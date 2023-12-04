@@ -2,44 +2,20 @@
 
 // Remplacez le chemin par le chemin absolu vers votre fichier JSON
 const url = "static/isom.json";
-/*let resultat;
+let xhr = new XMLHttpRequest();
+xhr.overrideMimeType("application/json");
+xhr.open("GET", url, false); // Notez-le "false" pour le mode synchrone
+xhr.send();
 
-const request = new Request(url);
+let resultat;
 
-fetch(request).then((response) => {
-  const data = response.json();
-});
-const data = await fetch(url);
-
-const name = data["(4275158523, 2813304703)"]["1, 4, 1"];
-
-console.log(name); // John Doe*/
-
-/*const fetchData = async () => {
-  const data = await fetch(url);
-  return data;
-};
-
-const data = await fetchData();
-
-console.log(data); // { name: "John Doe", age: 30 }*/
-
-// Fonction asynchrone pour charger les données
-async function fetchData() {
-  // Charge les données à partir de l'URL
-  const data = await fetch(url);
-
-  // Renvoie la promesse résolue
-  return data
+if (xhr.status === 200) {
+  resultat = JSON.parse(xhr.responseText);
+  // Je peux maintenant utiliser myJSONData dans le reste du code
+    console.log(resultat["(4275158523, 2813304703)"]["1, 4, 1"])
+} else {
+  console.error('Erreur de chargement du fichier JSON resultat');
 }
-
-// Appel de la fonction fetchData()
-const data = fetchData();
-
-// Utilisation de la méthode then() pour accéder au contenu du fichier JSON
-data.then((jsonData) => {
-  console.log(jsonData); // { userId: 1, id: 1, title: "delectus aut autem", completed: false }
-});
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /* Fonction qui fait l'appel à la base de donnée pour charger la base de donnée et renvoie un dictionnaire
 de proba ou remplit elle même le tableau */
