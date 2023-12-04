@@ -53,7 +53,7 @@ function fill_all(){
                     }
                 }
             }else if(chosen_team.length%2===1) {
-                console.log(chosen_team[chosen_team.length-1].textContent)
+                //console.log(chosen_team[chosen_team.length-1].textContent)
                 let team_cond = String(G_init.index_eq_runner(G_init.index_name(chosen_team[chosen_team.length-1].textContent), permR))
                 for (let i = 0; i < Winners.length; i++) {
                     for (let j = 0; j < Runners_up.length; j++) {
@@ -878,6 +878,7 @@ optionsContainer.appendChild(undoSection)
 undo_button.addEventListener("click", function(event){
     if (chosen_team.length !== 0) {
         let last_team_chosen = chosen_team.pop()
+        console.log("équipe qu'on undo: ",last_team_chosen.textContent)
         G_init.matrix = []
         G_init.set_length(0)
         G_init.set_teams([])
