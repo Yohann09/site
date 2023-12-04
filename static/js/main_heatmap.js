@@ -35,7 +35,6 @@ function fill_all(){
             let permR=result.permRow
             let proba_number;
             console.log("avant le if : ",q)
-            G_init.index_name()
             if(chosen_team.length%2===0 && chosen_team.length>0){
                 let index_runner = G_init.index_name(change_bySpace(chosen_team[chosen_team.length-2].textContent))//,permR)
                 let index_winner = G_init.index_name(change_bySpace(chosen_team[chosen_team.length-1].textContent))//,permC)
