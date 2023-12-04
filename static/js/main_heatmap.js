@@ -877,20 +877,31 @@ optionsContainer.appendChild(undoSection)
 // Touche pour revenir en arrière, enlever la dernière équipe ajoutée
 undo_button.addEventListener("click", function(event){
     if(chosen_team.length !== 0){
-        if(chosen_team.length%2==0){
-            console.log(change_bySpace(chosen_team[chosen_team.length-2].textContent))
-            console.log(change_bySpace(chosen_team[chosen_team.length-1].textContent))
-            console.log("teams:",G_init.teams())
-            let last = G_init.teams()[G_init.index_teams(change_bySpace(chosen_team[chosen_team.length-1].textContent))]
-            let before_last = G_init.teams()[G_init.index_teams(change_bySpace(chosen_team[chosen_team.length-2].textContent))]
-            console.log(last)
-            console.log(last.set())
-            console.log(before_last)
-            console.log(before_last.set())
-            G_init.add_team(last)
-            G_init.add_team(before_last)
-        }
         let last_team_chosen = chosen_team.pop()
+        if(chosen_team.length%2==0){
+            teams.push(team_1);
+            teams.push(team_2);
+            teams.push(team_3);
+            teams.push(team_4);
+            teams.push(team_5);
+            teams.push(team_6);
+            teams.push(team_7);
+            teams.push(team_8);
+            teams.push(team_9);
+            teams.push(team_10);
+            teams.push(team_11);
+            teams.push(team_12);
+            teams.push(team_13);
+            teams.push(team_14);
+            teams.push(team_15);
+            teams.push(team_16);
+            teams.forEach(element => {
+                G_init.add_team(element)
+            });
+            for(let i=0;i<chosen_team.length()/2;i++){
+                G_init.remove_2t(G_init.index_name(chosen_team[2*i]),G_init.index_name(chosen_team[2*i+1]))
+            }
+        }
         let selecteur = "."+changeSpaceby_(last_team_chosen.textContent)
         let colorChange = document.querySelectorAll(selecteur)
         // Pour enlever le surlignage
