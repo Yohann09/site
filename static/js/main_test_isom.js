@@ -865,7 +865,8 @@ function add_team_to_list_match(bouton){
     // J'actualise toutes les probas
     if(chosen_team.length<Runners_up.length+Winners.length-3) {
         //change_all()
-        fill_all()
+        //fill_all()
+        fill_all2()
     }
     // Ajoute la liste des matchs en fonction des clics de l'utilisateur
     let number = chosen_team.length
@@ -1014,7 +1015,8 @@ undo_button.addEventListener("click", function(event){
         let cell = document.getElementById(String(j) + "_" + String(i))
         cell.textContent = default_cell_match
         //change_all()
-        fill_all()
+        //fill_all()
+        fill_all2()
         if (affichage_heatmap) {
             heatmap()
         } else {
@@ -1088,6 +1090,7 @@ for(let i=0; i<Runners_up.length; i++){
     line.className = "proba-line"
     table.appendChild(line)
 }
-fill_all()
+//fill_all()
+fill_all2()
 verif_zero()
 
