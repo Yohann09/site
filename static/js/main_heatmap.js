@@ -35,9 +35,10 @@ function fill_all(){
             let permR=result.permRow
             let proba_number;
             console.log("avant le if : ",q)
+            G_init.index_name()
             if(chosen_team.length%2===0 && chosen_team.length>0){
-                let index_runner = G_init.index_name(change_bySpace(chosen_team[chosen_team.length-2].textContent),permR)
-                let index_winner = G_init.index_name(change_bySpace(chosen_team[chosen_team.length-1].textContent),permC)
+                let index_runner = G_init.index_name(change_bySpace(chosen_team[chosen_team.length-2].textContent))//,permR)
+                let index_winner = G_init.index_name(change_bySpace(chosen_team[chosen_team.length-1].textContent))//,permC)
                 G_init.remove_2t(index_runner, index_winner)
                 result = G_init.isom()
                 q=result.q
@@ -48,8 +49,6 @@ function fill_all(){
                     for (let j = 0; j < Runners_up.length; j++) {
                         let id = Runners_up[i] + " " + Winners[j]
                         let cell = document.getElementById(id)
-                        //console.log("nombre paire: ", Runners_up[i] + " " + Winners[j])
-                        //console.log(String(G_init.index_eq_runner(G_init.index_name(change_bySpace(Runners_up[i])), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(change_bySpace(Winners[j])), permC))
                         proba_number = resultat[q][String(G_init.index_eq_runner(G_init.index_name(change_bySpace(Runners_up[i])), permR))+", "+G_init.index_eq_winner(G_init.index_name(change_bySpace(Winners[j])), permC)]
                         cell.textContent = String(proba_number)+"%"
                     }
@@ -61,7 +60,6 @@ function fill_all(){
                     for (let j = 0; j < Runners_up.length; j++) {
                         let id = Runners_up[i] + " " + Winners[j]
                         let cell = document.getElementById(id)
-                        //console.log(String(G_init.index_eq_runner(G_init.index_name(change_bySpace(Runners_up[i])), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(change_bySpace(Winners[j])), permC) + ", " + team_cond)
                         proba_number = resultat[q][String(G_init.index_eq_runner(G_init.index_name(change_bySpace(Runners_up[i])), permR)) + ", " + G_init.index_eq_winner(G_init.index_name(change_bySpace(Winners[j])), permC) + ", " +team_cond]
                         cell.textContent = String(proba_number) + "%"
                     }
@@ -889,7 +887,7 @@ undo_button.addEventListener("click", function(event){
         teams.forEach(element => {
             G_init.add_team(element)
         });
-        for (let i = 0; i < Math.floor(chosen_team.length / 2); i++) {
+        for(let i = 0; i < Math.floor(chosen_team.length / 2)-1; i++) {
             console.log(i)
             console.log(Math.floor(chosen_team.length/2))
             console.log("equipe qu'on enlève dans le github: ", chosen_team[2*i],";",chosen_team[2*i+1])
