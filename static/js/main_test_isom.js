@@ -36,9 +36,10 @@ async function fetchData() {
 // Appel de la fonction fetchData()
 const data = fetchData();
 
-// Affichage des données dans la console
-console.log(data);
-
+// Utilisation de la méthode then() pour accéder au contenu du fichier JSON
+data.then((jsonData) => {
+  console.log(jsonData); // { userId: 1, id: 1, title: "delectus aut autem", completed: false }
+});
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /* Fonction qui fait l'appel à la base de donnée pour charger la base de donnée et renvoie un dictionnaire
 de proba ou remplit elle même le tableau */
