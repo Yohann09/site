@@ -125,6 +125,9 @@ class GraphBipartite {
         }
         this.last_runner_drawn = " ";
     }
+    set_teams(teams){
+        self._teams = teams;
+    }
     runners_up() {
         return this.teams_runners_up;
     }
@@ -876,10 +879,14 @@ undoSection.textContent="Options: "
 optionsContainer.appendChild(undoSection)
 // Touche pour revenir en arrière, enlever la dernière équipe ajoutée
 undo_button.addEventListener("click", function(event){
-    if(chosen_team.length !== 0){
+    if (chosen_team.length !== 0) {
         let last_team_chosen = chosen_team.pop()
-        if(chosen_team.length%2==0){
-            G_init = new GraphBipartite([])
+        if (chosen_team.length % 2 == 0) {
+            G_init.matrix = []
+            G_init.set_length(0)
+            G_init.set_teams([])
+            G_init.teams_winners = []
+            G_init.teams_runners_up = []
             teams.push(team_1);
             teams.push(team_2);
             teams.push(team_3);
@@ -899,19 +906,19 @@ undo_button.addEventListener("click", function(event){
             teams.forEach(element => {
                 G_init.add_team(element)
             });
-            for(let i=0;i<chosen_team.length/2;i++){
-                G_init.remove_2t(G_init.index_name(chosen_team[2*i]),G_init.index_name(chosen_team[2*i+1]))
+            for (let i = 0; i < chosen_team.length / 2; i++) {
+                G_init.remove_2t(G_init.index_name(chosen_team[2 * i]), G_init.index_name(chosen_team[2 * i + 1]))
             }
         }
-        let selecteur = "."+changeSpaceby_(last_team_chosen.textContent)
+        let selecteur = "." + changeSpaceby_(last_team_chosen.textContent)
         let colorChange = document.querySelectorAll(selecteur)
         // Pour enlever le surlignage
-        colorChange.forEach(function (element){
+        colorChange.forEach(function (element) {
             let chosen_team_text = []
-            chosen_team.forEach(function(button){
+            chosen_team.forEach(function (button) {
                 chosen_team_text.push(changeSpaceby_(button.textContent))
             })
-            if(element.classList.length === 3) {
+            if (element.classList.length === 3) {
                 let team_test = "defaut"
                 if (element.classList[1] === last_team_chosen.textContent) {
                     team_test = element.classList[2]
@@ -921,55 +928,58 @@ undo_button.addEventListener("click", function(event){
                 if (!(chosen_team_text.includes(team_test))) {
                     element.style.backgroundColor = "transparent"
                 }
-            }else if(element.classList.length===2){element.style.backgroundColor = "transparent"}
+            } else if (element.classList.length === 2) {
+                element.style.backgroundColor = "transparent"
+            }
         })
         //last_team_chosen.style.display = "block"    // on affiche de nouveau l'équipe
-        if(affichage_winners){
+        if (affichage_winners) {
             boutons_runner.push(last_team_chosen)   // on la remet dans la liste des boutons affichés correspondante
-        }else{
+        } else {
             boutons_winners.push(last_team_chosen)
         }
         affichage_winners = !affichage_winners      // on rebascule sur l'affichage des autres teams
-        boutons_winners.forEach(function(bouton){   // on change les modes d'affichage des boutons
-            if(affichage_winners){
+        boutons_winners.forEach(function (bouton) {   // on change les modes d'affichage des boutons
+            if (affichage_winners) {
                 // il faut que je rajoute une condition ici
                 // test si (proba(chosen_team[last],bouton) !== 0): on affiche le bouton sinon on le fait
-                let runner = chosen_team[chosen_team.length-1].textContent
-                let id = changeSpaceby_(runner)+" "+changeSpaceby_(bouton.textContent)
+                let runner = chosen_team[chosen_team.length - 1].textContent
+                let id = changeSpaceby_(runner) + " " + changeSpaceby_(bouton.textContent)
                 let cell = document.getElementById(id)
                 //console.log(cell.id)
                 let index = remove_from_list()
                 //console.log(index)
-                let index2 = give_index2(changeSpaceby_(bouton.textContent),changeSpaceby_(runner))
+                let index2 = give_index2(changeSpaceby_(bouton.textContent), changeSpaceby_(runner))
                 //console.log(index2)
-                if(cell){
-                    let nombre = Number(cell.textContent.slice(0,-1));// = resultat[index][index2]
-                    if(nombre!==0){
-                        bouton.style.display="block"
+                if (cell) {
+                    let nombre = Number(cell.textContent.slice(0, -1));// = resultat[index][index2]
+                    if (nombre !== 0) {
+                        bouton.style.display = "block"
                     }
+                } else {
+                    console.log("la cellule n'existe pas")
                 }
-                else{console.log("la cellule n'existe pas")}
-            }else{
+            } else {
                 disappear_bouton(bouton)
             }
         })
-        boutons_runner.forEach(function(bouton){
-            if(!affichage_winners){
-                bouton.style.display="block"
-            }else{
+        boutons_runner.forEach(function (bouton) {
+            if (!affichage_winners) {
+                bouton.style.display = "block"
+            } else {
                 disappear_bouton(bouton)
             }
         })
         let number = chosen_team.length + 1     // On enlève les équipes du tableau
-        let i = 1+(-1)**(number%2)
-        let j = Math.floor((number-1)/2)
-        let cell = document.getElementById(String(j)+"_"+String(i))
-        cell.textContent= default_cell_match
+        let i = 1 + (-1) ** (number % 2)
+        let j = Math.floor((number - 1) / 2)
+        let cell = document.getElementById(String(j) + "_" + String(i))
+        cell.textContent = default_cell_match
         //change_all()
         fill_all()
-        if(affichage_heatmap){
+        if (affichage_heatmap) {
             heatmap()
-        }else{
+        } else {
             change_graphism()
             verif_zero()
         }
