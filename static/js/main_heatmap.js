@@ -881,18 +881,16 @@ optionsContainer.appendChild(undoSection)
 undo_button.addEventListener("click", function(event){
     if (chosen_team.length !== 0) {
         let last_team_chosen = chosen_team.pop()
-        if (chosen_team.length % 2 == 0) {
-            G_init.matrix = []
-            G_init.set_length(0)
-            G_init.set_teams([])
-            G_init.teams_winners = []
-            G_init.teams_runners_up = []
-            teams.forEach(element => {
-                G_init.add_team(element)
-            });
-            for (let i = 0; i < chosen_team.length / 2; i++) {
-                G_init.remove_2t(G_init.index_name(chosen_team[2 * i]), G_init.index_name(chosen_team[2 * i + 1]))
-            }
+        G_init.matrix = []
+        G_init.set_length(0)
+        G_init.set_teams([])
+        G_init.teams_winners = []
+        G_init.teams_runners_up = []
+        teams.forEach(element => {
+            G_init.add_team(element)
+        });
+        for (let i = 0; i < chosen_team.length / 2; i++) {
+            G_init.remove_2t(G_init.index_name(chosen_team[2 * i]), G_init.index_name(chosen_team[2 * i + 1]))
         }
         let selecteur = "." + changeSpaceby_(last_team_chosen.textContent)
         let colorChange = document.querySelectorAll(selecteur)
