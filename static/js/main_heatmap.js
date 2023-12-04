@@ -899,7 +899,7 @@ undo_button.addEventListener("click", function(event){
             teams.forEach(element => {
                 G_init.add_team(element)
             });
-            for(let i=0;i<chosen_team.length()/2;i++){
+            for(let i=0;i<chosen_team.length/2;i++){
                 G_init.remove_2t(G_init.index_name(chosen_team[2*i]),G_init.index_name(chosen_team[2*i+1]))
             }
         }
