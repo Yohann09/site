@@ -879,6 +879,7 @@ undo_button.addEventListener("click", function(event){
     if(chosen_team.length !== 0){
         let last_team_chosen = chosen_team.pop()
         if(chosen_team.length%2==0){
+            G_init = new GraphBipartite([])
             teams.push(team_1);
             teams.push(team_2);
             teams.push(team_3);
