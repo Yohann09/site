@@ -878,6 +878,9 @@ optionsContainer.appendChild(undoSection)
 undo_button.addEventListener("click", function(event){
     if (chosen_team.length !== 0) {
         let last_team_chosen = chosen_team.pop()
+        if(chosen_team.length%2===0){
+
+        }
         console.log("équipe qu'on undo: ",last_team_chosen.textContent)
         G_init.matrix = []
         G_init.set_length(0)
@@ -887,12 +890,21 @@ undo_button.addEventListener("click", function(event){
         teams.forEach(element => {
             G_init.add_team(element)
         });
-        for(let i = 0; i < Math.floor(chosen_team.length / 2)-1; i++) {
+        if(chosen_team.length%2===0){
+            for(let i = 0; i < Math.floor(chosen_team.length / 2)-1; i++) {
             console.log(i)
             console.log(Math.floor(chosen_team.length/2))
-            console.log("equipe qu'on enlève dans le github: ", chosen_team[2*i],";",chosen_team[2*i+1])
+            console.log("equipe qu'on enlève dans le if: ", chosen_team[2*i],";",chosen_team[2*i+1])
+            G_init.remove_2t(G_init.index_name(chosen_team[2 * i].textContent), G_init.index_name(chosen_team[2 * i + 1].textContent))
+            }
+        }else{
+            for(let i = 0; i < Math.floor(chosen_team.length / 2); i++) {
+            console.log(i)
+            console.log(Math.floor(chosen_team.length/2))
+            console.log("equipe qu'on enlève dans le else: ", chosen_team[2*i],";",chosen_team[2*i+1])
             G_init.remove_2t(G_init.index_name(chosen_team[2 * i].textContent), G_init.index_name(chosen_team[2 * i + 1].textContent))
         }
+
         let selecteur = "." + changeSpaceby_(last_team_chosen.textContent)
         let colorChange = document.querySelectorAll(selecteur)
         // Pour enlever le surlignage
