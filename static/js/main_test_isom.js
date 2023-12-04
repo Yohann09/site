@@ -30,7 +30,7 @@ async function fetchData() {
   const data = await fetch(url);
 
   // Renvoie la promesse résolue
-  return data.then((response) => response.json());
+  return data
 }
 
 // Appel de la fonction fetchData()
