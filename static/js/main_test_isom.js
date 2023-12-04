@@ -15,14 +15,30 @@ const name = data["(4275158523, 2813304703)"]["1, 4, 1"];
 
 console.log(name); // John Doe*/
 
-const fetchData = async () => {
+/*const fetchData = async () => {
   const data = await fetch(url);
   return data;
 };
 
 const data = await fetchData();
 
-console.log(data); // { name: "John Doe", age: 30 }
+console.log(data); // { name: "John Doe", age: 30 }*/
+
+// Fonction asynchrone pour charger les données
+async function fetchData() {
+  // Charge les données à partir de l'URL
+  const data = await fetch(url);
+
+  // Renvoie la promesse résolue
+  return data.then((response) => response.json());
+}
+
+// Appel de la fonction fetchData()
+const data = fetchData();
+
+// Affichage des données dans la console
+console.log(data);
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /* Fonction qui fait l'appel à la base de donnée pour charger la base de donnée et renvoie un dictionnaire
 de proba ou remplit elle même le tableau */
