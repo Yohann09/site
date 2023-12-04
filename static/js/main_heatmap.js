@@ -887,22 +887,6 @@ undo_button.addEventListener("click", function(event){
             G_init.set_teams([])
             G_init.teams_winners = []
             G_init.teams_runners_up = []
-            teams.push(team_1);
-            teams.push(team_2);
-            teams.push(team_3);
-            teams.push(team_4);
-            teams.push(team_5);
-            teams.push(team_6);
-            teams.push(team_7);
-            teams.push(team_8);
-            teams.push(team_9);
-            teams.push(team_10);
-            teams.push(team_11);
-            teams.push(team_12);
-            teams.push(team_13);
-            teams.push(team_14);
-            teams.push(team_15);
-            teams.push(team_16);
             teams.forEach(element => {
                 G_init.add_team(element)
             });
