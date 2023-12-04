@@ -4,23 +4,8 @@
 const cheminVersJSON = "static/isom.json";
 let resultat;
 console.log("avant le test voila resultat: ",resultat)
-/*
-fetch(cheminVersJSON)
-  .then(response => response.json())
-  .then(data => {
-    console.log("on a chargé les données");
-    resultat=data;
-    let result = G_init.isom()
-      let q=result.q
-      let perm1=result.permCol
-      let perm2=result.permRow
-      //console.log(q,perm1,perm2)
-    let proba = resultat[q][String(G_init.index_eq_runner(G_init.index_name("PSG"), perm2))+", "+G_init.index_eq_winner(G_init.index_name("Bayern"), perm1)]
-    //console.log(proba)
-  })
-  .catch(error => console.error('Erreur de chargement du fichier JSON', error));
-*/
 console.log("petit test: ", resultat)
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /* Fonction qui fait l'appel à la base de donnée pour charger la base de donnée et renvoie un dictionnaire
 de proba ou remplit elle même le tableau */
@@ -73,9 +58,9 @@ function fill_all(){
                     }
                 }
             }
+            fill_Nan()
             verif_zero()
             change_graphism()
-            fill_Nan()
         })
 }
 
