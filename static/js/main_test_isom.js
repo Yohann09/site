@@ -12,7 +12,7 @@ let resultat;
 if (xhr.status === 200) {
   resultat = JSON.parse(xhr.responseText);
   // Je peux maintenant utiliser myJSONData dans le reste du code
-    console.log(resultat["(4275158523, 2813304703)"]["1, 4, 1"])
+    console.log(resultat["(4275158523, 2813304703)"]["0, 4, 1"])
 } else {
   console.error('Erreur de chargement du fichier JSON resultat');
 }
@@ -21,7 +21,7 @@ if (xhr.status === 200) {
 de proba ou remplit elle même le tableau */
 
 function fill_all(){
-    fetch(cheminVersJSON)
+    fetch(url)
         .then(response=>response.json())
         .then (resultat=> {
             let result = G_init.isom()
