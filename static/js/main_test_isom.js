@@ -645,8 +645,9 @@ function verif_zero(){
     for(let i=0;i<max_index/2;i++){
         let id = changeSpaceby_(chosen_team[2*i].textContent)+" "+changeSpaceby_(chosen_team[2*i+1].textContent)
         let cell = document.getElementById(id)
-        cell.style.backgroundColor = "#50f3db"
-        cell.textContent= "Match"
+        cell.style.backgroundColor = "#75ACDA"//"#50f3db"
+        //cell.textContent= "Match"
+        cell.textContent = "✔️"
     }
 }
 // Quand un match est décidé il n'y a plus de probas pour les équipes dans ce match, il y a donc des erreurs
@@ -801,10 +802,27 @@ function heatmap(){
             let number = 100-parseFloat(cell.textContent.slice(0, -1))
             let couleur = "hsl(0,100%,"+String(number)+"%)"
             cell.style.background = couleur
-            if(100-number>53){
+            if(100-number>33){
                 cell.style.color="white"
             }
         }
+    }
+    let max_index;  // vérifie s'il y a des matchs et affichent
+    // les cases correspondantes en bleu en écrivant match
+    if(chosen_team.length%2===0){max_index=chosen_team.length}
+    else{max_index=chosen_team.length-1}
+    for(let i=0;i<max_index/2;i++){
+        let id = changeSpaceby_(chosen_team[2*i].textContent)+" "+changeSpaceby_(chosen_team[2*i+1].textContent)
+        let cell = document.getElementById(id)
+        cell.style.backgroundColor = "#75ACDA"//"#50f3db"
+        //cell.textContent= "Match"
+        cell.textContent = "✔️"
+    }
+    if(chosen_team.length%2===1){
+        let last_team = chosen_team[chosen_team.length-1].textContent
+        let line = document.getElementById(changeSpaceby_(last_team))
+        line.style.border = "2px solid #fd5007"
+        line.style.boxSizing = 'border-box'
     }
 }
 
