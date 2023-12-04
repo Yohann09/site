@@ -2,7 +2,7 @@
 
 // Remplacez le chemin par le chemin absolu vers votre fichier JSON
 const url = "static/isom.json";
-let resultat;
+/*let resultat;
 
 const request = new Request(url);
 
@@ -13,8 +13,16 @@ const data = await fetch(url);
 
 const name = data["(4275158523, 2813304703)"]["1, 4, 1"];
 
-console.log(name); // John Doe
+console.log(name); // John Doe*/
 
+const fetchData = async () => {
+  const data = await fetch(url);
+  return data;
+};
+
+const data = await fetchData();
+
+console.log(data); // { name: "John Doe", age: 30 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /* Fonction qui fait l'appel à la base de donnée pour charger la base de donnée et renvoie un dictionnaire
 de proba ou remplit elle même le tableau */
