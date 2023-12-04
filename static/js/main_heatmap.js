@@ -890,6 +890,8 @@ undo_button.addEventListener("click", function(event){
             G_init.add_team(element)
         });
         for (let i = 0; i < chosen_team.length / 2; i++) {
+            console.log(i)
+            console.log(chosen_team.length/2)
             console.log("equipe qu'on enlève dans le github: ", chosen_team[2*i],";",chosen_team[2*i+1])
             G_init.remove_2t(G_init.index_name(chosen_team[2 * i].textContent), G_init.index_name(chosen_team[2 * i + 1].textContent))
         }
