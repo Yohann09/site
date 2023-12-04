@@ -74,6 +74,7 @@ function fill_all(){
                 }
             }
             verif_zero()
+            change_graphism()
             fill_Nan()
         })
 }
