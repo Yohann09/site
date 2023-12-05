@@ -676,7 +676,7 @@ function fill_Nan(){
                     if(j>0){
                         //console.log(element)
                         element.style.backgroundColor = "transparent"
-                        element.textContent = "0.00%"
+                        element.textContent = "-"
                     }else{
                         element.style.backgroundColor = "transparent"
                     }
@@ -693,7 +693,7 @@ function fill_Nan(){
             colorChange.forEach(function (element){
                 if(i>0){
                     element.style.backgroundColor = "transparent"
-                    element.textContent = "0.00%"
+                    element.textContent = "-"
                 }else{
                     element.style.backgroundColor = "transparent"
                 }
