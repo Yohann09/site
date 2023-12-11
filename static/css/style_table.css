@@ -12,6 +12,10 @@
     font-weight: lighter;
 }
 
+html {
+    touch-action: manipulation;
+}
+
 /* -------------------------- Affichage des boutons ------------------------ */
 
 #bouton-container {
