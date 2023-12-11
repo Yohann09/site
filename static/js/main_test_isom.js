@@ -20,6 +20,10 @@ if (xhr.status === 200) {
 /* Fonction qui fait l'appel à la base de donnée pour charger la base de donnée et renvoie un dictionnaire
 de proba ou remplit elle même le tableau */
 
+document.addEventListener('gesturestart', function (e) {
+    e.preventDefault();
+});
+
 function fill_all2(){
     let result = G_init.isom()
     let q=result.q
