@@ -13,7 +13,7 @@
 }
 
 html {
-    touch-action: manipulation;
+    touch-action: none;
 }
 
 /* -------------------------- Affichage des boutons ------------------------ */
