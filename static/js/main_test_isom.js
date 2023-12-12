@@ -873,6 +873,7 @@ function add_team_to_list_match(bouton){
         if(affichage_winners) {  // on vérifie que le bouton est un runner, dans ce cas on peut pas afficher tous les winners
             let cellule = document.getElementById(changeSpaceby_(bouton.textContent)+" "+changeSpaceby_(button.textContent))
             let proba = parseFloat(cellule.textContent)
+            console.log("heeeeee")
             console.log(bouton.textContent," : ",proba)
             if(proba !== 0){
                 button.style.display="block"
