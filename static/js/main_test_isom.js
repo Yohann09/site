@@ -874,7 +874,7 @@ function add_team_to_list_match(bouton){
             let cellule = document.getElementById(changeSpaceby_(bouton.textContent)+" "+changeSpaceby_(button.textContent))
             let proba = parseFloat(cellule.textContent)
             console.log("heeeeee")
-            console.log(bouton.textContent," : ",proba)
+            console.log(bouton.textContent," et ",button.textContent," : ",proba)
             if(proba !== 0){
                 button.style.display="block"
             }
