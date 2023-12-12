@@ -873,8 +873,6 @@ function add_team_to_list_match(bouton){
         if(affichage_winners) {  // on vérifie que le bouton est un runner, dans ce cas on peut pas afficher tous les winners
             let cellule = document.getElementById(changeSpaceby_(bouton.textContent)+" "+changeSpaceby_(button.textContent))
             let proba = parseFloat(cellule.textContent)
-            console.log("heeeeee")
-            console.log(bouton.textContent," et ",button.textContent," : ",proba)
             if(proba !== 0){
                 button.style.display="block"
             }
@@ -1010,6 +1008,8 @@ undo_button.addEventListener("click", function(event){
                 //console.log(index2)
                 if (cell) {
                     let nombre = Number(cell.textContent.slice(0, -1));// = resultat[index][index2]
+                    console.log("heeeeee")
+                    console.log(bouton.textContent," et ",button.textContent," : ",nombre)
                     if (nombre !== 0) {
                         bouton.style.display = "block"
                     }
