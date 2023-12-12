@@ -26,7 +26,7 @@ function fill_all2(){
     let permC=result.permCol
     let permR=result.permRow
     let proba_number;
-    console.log("avant le if : ",q)
+    //console.log("avant le if : ",q)
     if(chosen_team.length%2===0 && chosen_team.length>0){
         let index_runner = G_init.index_name(change_bySpace(chosen_team[chosen_team.length-2].textContent))//,permR)
         let index_winner = G_init.index_name(change_bySpace(chosen_team[chosen_team.length-1].textContent))//,permC)
@@ -35,7 +35,7 @@ function fill_all2(){
         q=result.q
         permC=result.permCol
         permR=result.permRow
-        console.log("q quand nombre paire: ",q)
+        //console.log("q quand nombre paire: ",q)
         for(let i=0;i<Winners.length;i++){
             for (let j = 0; j < Runners_up.length; j++) {
                 let id = Runners_up[i] + " " + Winners[j]
@@ -873,6 +873,7 @@ function add_team_to_list_match(bouton){
         if(affichage_winners) {  // on vérifie que le bouton est un runner, dans ce cas on peut pas afficher tous les winners
             let cellule = document.getElementById(changeSpaceby_(bouton.textContent)+" "+changeSpaceby_(button.textContent))
             let proba = parseFloat(cellule.textContent)
+            console.log(bouton.textContent," : ",proba)
             if(proba !== 0){
                 button.style.display="block"
             }
@@ -881,9 +882,7 @@ function add_team_to_list_match(bouton){
     })
     chosen_team.push(bouton)    // Rajoute l'équipe dans les équipes choisies
     // J'actualise toutes les probas
-    if(chosen_team.length<Runners_up.length+Winners.length-3) {
-        //change_all()
-        //fill_all()
+    if(chosen_team.length<Runners_up.length+Winners.length-3){
         fill_all2()
     }
     // Ajoute la liste des matchs en fonction des clics de l'utilisateur
