@@ -114,6 +114,12 @@
     background-color: greenyellow;
 }
 
+#random_button{
+    background-color: aquamarine;
+    width: auto;
+    color: black;
+}
+
 /* -------------------- Affichage des tableaux ------------------------- */
 
 #table-container{ /* Contenant des deux tableaux*/
