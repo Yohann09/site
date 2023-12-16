@@ -1111,6 +1111,7 @@ random_team.addEventListener("click", function(){
         })
         let random_number = Math.floor(Math.random() * display_button.length)
         console.log(display_button)
+        console.log("bouton sur lequel on clique: ",display_button[random_number].textContent)
         display_button[random_number].click()
     }else{
         runners_resultat.forEach(function(name){    // On copie les listes
