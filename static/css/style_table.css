@@ -80,7 +80,7 @@
 #options_boutons button{ /* pour modifier les propriétés des boutons options*/
     border-radius: 5px;
     border: none;
-    width: 5em; /* 2 fois la taille du "em" (unité relative) */
+    width: auto; /* 2 fois la taille du "em" (unité relative) */
     height: 2rem;
     margin:3px;
 }
