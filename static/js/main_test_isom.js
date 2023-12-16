@@ -1009,8 +1009,6 @@ undo_button.addEventListener("click", function(event){
                 //console.log(index2)
                 if (cell) {
                     let nombre = Number(cell.textContent.slice(0, -1));// = resultat[index][index2]
-                    console.log("heeeeee")
-                    console.log(runner," et ",bouton.textContent," : ",nombre)
                     if (nombre !== 0) {
                         bouton.style.display = "block"
                     }
@@ -1070,6 +1068,65 @@ heatmap_button.addEventListener("click",function(){
         verif_zero()
         affichage_heatmap=!affichage_heatmap
     }
+})
+
+let random_team = document.createElement("button")
+random_team.id = "random_button"
+random_team.textContent = "Draw random team"
+optionsButtonContainer.appendChild(random_team)
+random_team.addEventListener("click", function(){
+    let list_button = []
+    let max_index;
+    if(affichage_winners){
+        winners_resultat.forEach(function(name){    // copie de liste
+            list_button.push(name)
+        })
+        if(chosen_team.length%2 === 1){max_index = chosen_team.length-1}
+        else{max_index = chosen_team.length}
+        for(let i=0;i<max_index;i++) {
+            let name = change_bySpace(chosen_team[i].textContent) // Normalement la liste sera déjà bien organisé
+            if (list_button.includes(name)) {
+                remove(list_button, name)
+            }
+        }
+        let runner = chosen_team[chosen_team.length - 1].textContent
+        let id = changeSpaceby_(runner) + " " + changeSpaceby_(bouton.textContent)
+        let cell = document.getElementById(id)
+        if (cell) {
+            let nombre = Number(cell.textContent.slice(0, -1));// = resultat[index][index2]
+            if (nombre !== 0) {
+                remove(list_button, runner)
+            }
+        }
+        let display_button=[]
+        boutons_winners.forEach(function(bouton){
+            if(list_button.includes(bouton.textContent)){
+                display_button.push(bouton)
+            }
+        })
+        let random_number = Math.floor(Math.random() * display_button.length)
+        display_button[random_number].click()
+    }else{
+        runners_resultat.forEach(function(name){    // On copie les listes
+            list_button.push(name)
+        })
+        let display_button=[]
+        boutons_runner.forEach(function(bouton){
+            if(list_button.includes(bouton.textContent)){
+                display_button.push(bouton)
+            }
+        })
+        let random_number = Math.floor(Math.random() * display_button.length)
+        display_button[random_number].click()
+    }
+    if(chosen_team.length%2 === 1){max_index = chosen_team.length-1}
+        else{max_index = chosen_team.length}
+        for(let i=0;i<max_index;i++) {
+            let name = change_bySpace(chosen_team[i].textContent) // Normalement la liste sera déjà bien organisé
+            if (list_button.includes(name)) {
+                remove(list_button, name)
+            }
+        }
 })
 
 // Rempli le tableau des probas
