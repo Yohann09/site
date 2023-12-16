@@ -1110,6 +1110,7 @@ random_team.addEventListener("click", function(){
             }
         })
         let random_number = Math.floor(Math.random() * display_button.length)
+        console.log(display_button)
         display_button[random_number].click()
     }else{
         runners_resultat.forEach(function(name){    // On copie les listes
@@ -1122,16 +1123,9 @@ random_team.addEventListener("click", function(){
             }
         })
         let random_number = Math.floor(Math.random() * display_button.length)
+        console.log(display_button)
         display_button[random_number].click()
     }
-    if(chosen_team.length%2 === 1){max_index = chosen_team.length-1}
-        else{max_index = chosen_team.length}
-        for(let i=0;i<max_index;i++) {
-            let name = change_bySpace(chosen_team[i].textContent) // Normalement la liste sera déjà bien organisé
-            if (list_button.includes(name)) {
-                remove(list_button, name)
-            }
-        }
 })
 
 // Rempli le tableau des probas
