@@ -119,6 +119,7 @@
     width: auto;
     height: auto;
     color: black;
+    white-space: nowrap;
 }
 
 /* -------------------- Affichage des tableaux ------------------------- */
