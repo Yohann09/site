@@ -1086,12 +1086,14 @@ random_team.addEventListener("click", function(){
         } else {
             max_index = chosen_team.length
         }
+        console.log("liste de bouton: ",list_button)
         for (let i = 0; i < max_index; i++) {
             let name = change_bySpace(chosen_team[i].textContent) // Normalement la liste sera déjà bien organisé
             if (list_button.includes(name)) {
                 remove(list_button, name)
             }
         }
+        console.log("liste de bouton après les premiers remove : ",list_button)
         Winners.forEach(function(name){
             let runner = chosen_team[chosen_team.length - 1].textContent
             let id = changeSpaceby_(runner) + " " + changeSpaceby_(name)
