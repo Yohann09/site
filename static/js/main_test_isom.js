@@ -1098,7 +1098,7 @@ random_team.addEventListener("click", function(){
             let cell = document.getElementById(id)
             if (cell) {
                 let nombre = Number(cell.textContent.slice(0, -1));// = resultat[index][index2]
-                console.log("la propba qu'on teste: ", number)
+                console.log("la propba qu'on teste: ", nombre)
                 if (nombre !== 0) {
                     remove(list_button, runner)
                 }
