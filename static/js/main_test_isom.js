@@ -1075,66 +1075,69 @@ random_team.id = "random_button"
 random_team.textContent = "Draw random team"
 optionsButtonContainer.appendChild(random_team)
 random_team.addEventListener("click", function(){
-    let list_button = []
-    let max_index;
-    if(affichage_winners) {
-        winners_resultat.forEach(function (name) {    // copie de liste
-            list_button.push(name)
-        })
-        if (chosen_team.length % 2 === 1) {
-            max_index = chosen_team.length - 1
-        } else {
-            max_index = chosen_team.length
-        }
-        console.log("liste de bouton: ",list_button)
-        for (let i = 0; i < max_index; i++) {
-            let name = change_bySpace(chosen_team[i].textContent) // Normalement la liste sera déjà bien organisé
-            if (list_button.includes(name)) {
-                remove(list_button, name)
+    if(chosen_team.length!==Winners.length+Runners_up.length){
+        let list_button = []
+        let max_index;
+        if(affichage_winners) {
+            winners_resultat.forEach(function (name) {    // copie de liste
+                list_button.push(name)
+            })
+            if (chosen_team.length % 2 === 1) {
+                max_index = chosen_team.length - 1
+            } else {
+                max_index = chosen_team.length
             }
-        }
-        console.log("liste de bouton après les premiers remove : ",list_button)
-        Winners.forEach(function(name){
-            let runner = chosen_team[chosen_team.length - 1].textContent
-            let id = changeSpaceby_(runner) + " " + changeSpaceby_(name)
-            let cell = document.getElementById(id)
-            if (cell) {
-                let nombre = Number(cell.textContent.slice(0, -1));// = resultat[index][index2]
-                console.log("la proba qu'on teste entre ",changeSpaceby_(runner)," et ",changeSpaceby_(name)," : ", nombre)
-                if (nombre === 0) {
-                    if(list_button.includes(change_bySpace(name)))
-                    remove(list_button, change_bySpace(name))
-                    console.log("liste bouton juste après le remove: ",list_button)
+            console.log("liste de bouton: ",list_button)
+            for (let i = 0; i < max_index; i++) {
+                let name = change_bySpace(chosen_team[i].textContent) // Normalement la liste sera déjà bien organisé
+                if (list_button.includes(name)) {
+                    remove(list_button, name)
                 }
             }
-        })
-        console.log("list_bouton après les probas: ", list_button)
-        let display_button=[]
-        boutons_winners.forEach(function(bouton){
-            if(list_button.includes(bouton.textContent)){
-                display_button.push(bouton)
-            }
-        })
-        let random_number = Math.floor(Math.random() * display_button.length)
-        console.log("display bouton: ",display_button)
-        console.log("bouton sur lequel on clique avec le truc aléatoire: ",display_button[random_number].textContent)
-        display_button[random_number].click()
-    }else{
-        runners_resultat.forEach(function(name){    // On copie les listes
-            list_button.push(name)
-        })
-        let display_button=[]
-        boutons_runner.forEach(function(bouton){
-            if(list_button.includes(bouton.textContent)){
-                display_button.push(bouton)
-            }
-        })
-        let random_number = Math.floor(Math.random() * display_button.length)
-        //console.log(display_button)
-        //console.log("bouton sur lequel on clique: ",display_button[random_number].textContent)
-        display_button[random_number].click()
+            console.log("liste de bouton après les premiers remove : ",list_button)
+            Winners.forEach(function(name){
+                let runner = chosen_team[chosen_team.length - 1].textContent
+                let id = changeSpaceby_(runner) + " " + changeSpaceby_(name)
+                let cell = document.getElementById(id)
+                if (cell) {
+                    let nombre = Number(cell.textContent.slice(0, -1));// = resultat[index][index2]
+                    console.log("la proba qu'on teste entre ",changeSpaceby_(runner)," et ",changeSpaceby_(name)," : ", nombre)
+                    if (nombre === 0) {
+                        if(list_button.includes(change_bySpace(name)))
+                        remove(list_button, change_bySpace(name))
+                        console.log("liste bouton juste après le remove: ",list_button)
+                    }
+                }
+            })
+            console.log("list_bouton après les probas: ", list_button)
+            let display_button=[]
+            boutons_winners.forEach(function(bouton){
+                if(list_button.includes(bouton.textContent)){
+                    display_button.push(bouton)
+                }
+            })
+            let random_number = Math.floor(Math.random() * display_button.length)
+            console.log("display bouton: ",display_button)
+            console.log("bouton sur lequel on clique avec le truc aléatoire: ",display_button[random_number].textContent)
+            display_button[random_number].click()
+        }else{
+            runners_resultat.forEach(function(name){    // On copie les listes
+                list_button.push(name)
+            })
+            let display_button=[]
+            boutons_runner.forEach(function(bouton){
+                if(list_button.includes(bouton.textContent)){
+                    display_button.push(bouton)
+                }
+            })
+            let random_number = Math.floor(Math.random() * display_button.length)
+            //console.log(display_button)
+            //console.log("bouton sur lequel on clique: ",display_button[random_number].textContent)
+            display_button[random_number].click()
+        }
     }
 })
+
 
 // Rempli le tableau des probas
 // Rempli la première ligne avec les équipes
