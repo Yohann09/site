@@ -117,6 +117,7 @@
 #random_button{
     background-color: aquamarine;
     width: auto;
+    height: auto;
     color: black;
 }
 
