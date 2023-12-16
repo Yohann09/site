@@ -1106,6 +1106,7 @@ random_team.addEventListener("click", function(){
                 }
             }
         })
+        console.log("list_bouton après les probas: ", list_button)
         let display_button=[]
         boutons_winners.forEach(function(bouton){
             if(list_button.includes(bouton.textContent)){
@@ -1113,8 +1114,8 @@ random_team.addEventListener("click", function(){
             }
         })
         let random_number = Math.floor(Math.random() * display_button.length)
-        console.log(display_button)
-        console.log("bouton sur lequel on clique: ",display_button[random_number].textContent)
+        console.log("display bouton: ",display_button)
+        console.log("bouton sur lequel on clique avec le truc aléatoire: ",display_button[random_number].textContent)
         display_button[random_number].click()
     }else{
         runners_resultat.forEach(function(name){    // On copie les listes
