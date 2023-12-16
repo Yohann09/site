@@ -1103,6 +1103,7 @@ random_team.addEventListener("click", function(){
                 console.log("la proba qu'on teste entre ",changeSpaceby_(runner)," et ",changeSpaceby_(name)," : ", nombre)
                 if (nombre === 0) {
                     remove(list_button, name)
+                    console.log("liste bouton juste après le remove: ",list_button)
                 }
             }
         })
