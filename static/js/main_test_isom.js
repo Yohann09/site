@@ -645,9 +645,9 @@ function verif_zero(){
     for(let i=0;i<max_index/2;i++){
         let id = changeSpaceby_(chosen_team[2*i].textContent)+" "+changeSpaceby_(chosen_team[2*i+1].textContent)
         let cell = document.getElementById(id)
-        cell.style.backgroundColor = "#75ACDA"//"#50f3db"
-        //cell.textContent= "Match"
-        cell.textContent = "✔️"
+        cell.style.backgroundColor = "#50f3db"//"#75ACDA"
+        cell.textContent= "Match"
+        //cell.textContent = "✔️"
     }
 }
 // Quand un match est décidé il n'y a plus de probas pour les équipes dans ce match, il y a donc des erreurs
@@ -676,7 +676,7 @@ function fill_Nan(){
                     if(j>0){
                         //console.log(element)
                         element.style.backgroundColor = "transparent"
-                        element.textContent = "-"
+                        element.textContent = "0%"
                     }else{
                         element.style.backgroundColor = "transparent"
                     }
@@ -693,7 +693,7 @@ function fill_Nan(){
             colorChange.forEach(function (element){
                 if(i>0){
                     element.style.backgroundColor = "transparent"
-                    element.textContent = "-"
+                    element.textContent = "0%"
                 }else{
                     element.style.backgroundColor = "transparent"
                 }
@@ -814,9 +814,9 @@ function heatmap(){
     for(let i=0;i<max_index/2;i++){
         let id = changeSpaceby_(chosen_team[2*i].textContent)+" "+changeSpaceby_(chosen_team[2*i+1].textContent)
         let cell = document.getElementById(id)
-        cell.style.backgroundColor = "#75ACDA"//"#50f3db"
-        //cell.textContent= "Match"
-        cell.textContent = "✔️"
+        cell.style.backgroundColor = "#50f3db"//"#75ACDA"
+        cell.textContent= "Match"
+        //cell.textContent = "✔️"
     }
     if(chosen_team.length%2===1){
         let last_team = chosen_team[chosen_team.length-1].textContent
